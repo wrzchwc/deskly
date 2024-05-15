@@ -1,0 +1,21 @@
+{
+  "name": "constants",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "modules/shared/constantns/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/modules/shared/constantns",
+        "main": "modules/shared/constantns/src/index.ts",
+        "tsConfig": "modules/shared/constantns/tsconfig.lib.json",
+        "assets": [],
+        "generatePackageJson": true,
+        "format": ["cjs"]
+      }
+    }
+  }
+}
