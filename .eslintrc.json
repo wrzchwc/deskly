@@ -1,44 +1,103 @@
 {
-  "ignorePatterns": ["!**/*"],
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "ignorePatterns": [
+    "**/*"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@nx",
+    "@angular-eslint",
+    "prettier",
+    "html",
+    "functional"
+  ],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "rules": {}
-    },
-    {
-      "files": ["*.ts"],
-      "extends": [
-        "plugin:@nx/angular",
-        "plugin:@angular-eslint/template/process-inline-templates"
+      "files": [
+        "*.ts",
+        "*.tsx"
       ],
+      "extends": [
+        "plugin:@nx/typescript",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "parserOptions": {
+        "project": "./tsconfig.*?.json"
+      },
       "rules": {
-        "@angular-eslint/directive-selector": [
+        "functional/immutable-data": [
           "error",
           {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
+            "ignoreAccessorPattern": "**.mutable*",
+            "ignoreIdentifierPattern": "_"
           }
         ],
-        "@angular-eslint/component-selector": [
+        "functional/no-let": [
           "error",
           {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
+            "allowInFunctions": true
           }
-        ]
+        ],
+        "functional/prefer-property-signatures": "error",
+        "functional/prefer-readonly-type": [
+          "error",
+          {
+            "allowLocalMutation": true,
+            "allowMutableReturnType": true,
+            "ignoreCollections": true,
+            "ignorePattern": [
+              "_",
+              "mutable"
+            ]
+          }
+        ],
+        "functional/no-mixed-types": "error",
+        "functional/no-loop-statements": "error",
+        "no-param-reassign": "error",
+        "prefer-const": "error",
+        "no-var": "error",
+        "@angular-eslint/no-lifecycle-call": "error",
+        "@angular-eslint/no-pipe-impure": "error",
+        "@angular-eslint/prefer-output-readonly": "error",
+        "complexity": [
+          "error",
+          {
+            "max": 6
+          }
+        ],
+        "@typescript-eslint/consitent-type-definitions": "error",
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "off",
+          {
+            "accessibility": "explicit"
+          }
+        ],
+        "@typescript-eslint/no-explicit-any": "error",
+        "id-blacklist": "error",
+        "id-match": "off",
+        "no-underscore-dangle": "off"
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@nx/angular-template"],
-      "rules": {}
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/template/banana-in-box": "error",
+        "@angular-eslint/template/no-negated-async": "error",
+        "@angular-eslint/template/eqeqeq": "error"
+      }
     }
-  ],
-  "extends": ["./.eslintrc.base.json"]
+  ]
 }

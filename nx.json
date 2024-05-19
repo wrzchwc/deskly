@@ -1,5 +1,12 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "cli": {
+    "analytics": false,
+    "packageManager": "npm"
+  },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
@@ -68,16 +75,27 @@
       }
     }
   ],
+  "pluginsConfig": {
+    "@nx/js": {
+      "analyzeSourceFiles": true
+    }
+  },
   "generators": {
     "@nx/angular:application": {
       "e2eTestRunner": "cypress",
       "linter": "eslint",
       "style": "scss",
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "strict": true
     },
     "@nx/angular:library": {
       "linter": "eslint",
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "changeDetection": "OnPush",
+      "flat": true,
+      "prefix": "deskly",
+      "simpleName": "true",
+      "style": "scss"
     },
     "@nx/angular:component": {
       "style": "scss",
@@ -85,5 +103,5 @@
     }
   },
   "defaultProject": "deskly",
-  "nxCloudAccessToken": "YTlmNTI0YzUtM2EzYS00NWI3LWFlMDItNjA4NDUxMGM4NTdjfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "YTlmNTI0YzUtM2EzYS00NWI3LWFlMDItNjA4NDUxMGM4NTdjfHJlYWQtd3JpdGU=",
 }

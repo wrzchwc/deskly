@@ -3,3 +3,6 @@
 /coverage
 /.nx/cache
 .angular
+.idea
+node_modules
+
