@@ -9,7 +9,7 @@ export const ROUTES: Routes = [
   },
   {
     path: Route.LOCATION_MANAGEMENT,
-    loadComponent: async () => (await import('@deskly/location-management')).LocationManagmentPageComponent,
+    loadComponent: async () => (await import('@deskly/location-management')).LocationManagementPageComponent,
     title: Title.LOCATION_MANAGEMENT,
   }
 ];

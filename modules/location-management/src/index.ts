@@ -1,1 +1,1 @@
-export {LocationManagmentPageComponent} from './lib/feature/location-managment-page.component'
+export {LocationManagementPageComponent} from './lib/feature/location-management-page.component'

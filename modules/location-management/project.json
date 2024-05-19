@@ -2,7 +2,7 @@
   "name": "location-management",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "modules/location-management/src",
-  "prefix": "lib",
+  "prefix": "deskly",
   "projectType": "library",
   "tags": [],
   "targets": {
