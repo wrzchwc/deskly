@@ -1,0 +1,11 @@
+<div [formGroup]="formGroup()" class="opening-hours-input__main-container">
+  <span class="day-label">{{day()}}</span>
+  <mat-form-field class="hour-input-field">
+    <mat-label>from</mat-label>
+    <input type="time" matInput formControlName="start" />
+  </mat-form-field>
+  <mat-form-field class="hour-input-field">
+    <mat-label>to</mat-label>
+    <input type="time" matInput formControlName="finish" />
+  </mat-form-field>
+</div>

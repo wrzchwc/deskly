@@ -1,7 +1,11 @@
-export interface Location {
+export interface CreateLocationRequest {
   readonly name: string;
   readonly address: Address;
-  readonly hours: Record<WeekDay, [OpeningHours]>
+  readonly hours: Record<WeekDay, [OpeningHours]>;
+}
+
+export interface Location extends CreateLocationRequest {
+  readonly id: string;
 }
 
 interface Address {
@@ -12,7 +16,14 @@ interface Address {
   readonly zipCode: string;
 }
 
-type WeekDay = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+type WeekDay =
+  | 'monday'
+  | 'tuesday'
+  | 'wednesday'
+  | 'thursday'
+  | 'friday'
+  | 'saturday'
+  | 'sunday';
 
 interface OpeningHours {
   readonly start: string;

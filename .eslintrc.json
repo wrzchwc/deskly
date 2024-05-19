@@ -27,9 +27,6 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended"
       ],
-      "parserOptions": {
-        "project": "./tsconfig.*?.json"
-      },
       "rules": {
         "functional/immutable-data": [
           "error",
@@ -57,7 +54,6 @@
             ]
           }
         ],
-        "functional/no-mixed-types": "error",
         "functional/no-loop-statements": "error",
         "no-param-reassign": "error",
         "prefer-const": "error",
@@ -71,7 +67,6 @@
             "max": 6
           }
         ],
-        "@typescript-eslint/consitent-type-definitions": "error",
         "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/explicit-member-accessibility": [
           "off",

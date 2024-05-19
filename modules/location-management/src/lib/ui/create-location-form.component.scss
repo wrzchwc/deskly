@@ -1,7 +1,34 @@
 .create-location-form__form {
+  padding: 2rem 0;
+
   .form-row {
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    gap: 1rem;
+
+    &#street-row {
+      #street {
+        flex-grow: 23;
+      }
+
+      :not(#street) {
+        flex-grow: 1;
+      }
+    }
+
+    &#city-row{
+      #city {
+        flex-grow: 3;
+      }
+
+      :not(#city) {
+        flex-grow: 1;
+      }
+    }
+  }
+
+  .form-section {
+    color: var(--mat-tab-header-active-label-text-color);
+    font-weight: 400;
   }
 }
