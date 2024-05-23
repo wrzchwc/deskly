@@ -8,8 +8,15 @@ import {
   OpeningHoursFormGroup,
   OpeningHoursInputComponent
 } from './opening-hours-input.component';
-import { WeekDay } from '@deskly/constants';
-import { CreateLocationRequest } from '../domain/location.model';
+import { Address, OpeningHours, WeekDay } from '../domain/location.model';
+import { WeekDay as WeekDayLabel } from '@deskly/constants';
+import { MatDialogRef } from '@angular/material/dialog';
+
+export interface CreateLocationConfig {
+  readonly name: string;
+  readonly address: Address;
+  readonly hours: Record<WeekDay, OpeningHours>;
+}
 
 @Component({
   selector: 'deskly-create-location-form',
@@ -23,12 +30,12 @@ import { CreateLocationRequest } from '../domain/location.model';
     ReactiveFormsModule,
     OpeningHoursInputComponent
   ],
-  templateUrl: './create-location-form.component.html',
-  styleUrl: './create-location-form.component.scss',
+  templateUrl: './create-location-modal.component.html',
+  styleUrl: './create-location-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateLocationFormComponent {
-  readonly submit = output<CreateLocationRequest>();
+export class CreateLocationModalComponent {
+  readonly formSubmitted = output<CreateLocationConfig>();
 
   readonly formGroup = this.formBuilder.group({
     name: this.formBuilder.nonNullable.control('', [Validators.required]),
@@ -80,11 +87,18 @@ export class CreateLocationFormComponent {
     this.formGroup.controls.hours.controls
   );
 
-  readonly days: WeekDay[] = Object.values(WeekDay);
+  readonly days: WeekDayLabel[] = Object.values(WeekDayLabel);
 
-  constructor(private readonly formBuilder: FormBuilder) {}
+  constructor(
+    private readonly formBuilder: FormBuilder,
+    private readonly matDialogRef: MatDialogRef<CreateLocationConfig>
+  ) {}
 
   createLocation(): void {
-    this.submit.emit(this.formGroup.value as CreateLocationRequest);
+    this.matDialogRef.close(this.formGroup.value as CreateLocationConfig);
+  }
+
+  cancel(): void {
+    this.matDialogRef.close();
   }
 }

@@ -1,1 +1,1 @@
-export {LocationManagementPageComponent} from './lib/feature/location-management-page.component'
+export { LOCATION_ROUTES } from './location.routes';

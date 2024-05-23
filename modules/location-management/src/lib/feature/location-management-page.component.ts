@@ -1,25 +1,33 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
-import { CreateLocationFormComponent } from '../ui/create-location-form.component';
-import { LocationService } from '../domain/location.service';
-import { CreateLocationRequest } from '../domain/location.model';
+import { CreateLocationModalComponent } from '../ui/create-location-modal.component';
+import { MatFabButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { Store } from '@ngrx/store';
+import { startAddingLocation } from '../domain/location.actions';
 
 @Component({
   selector: 'deskly-location-management-page',
   standalone: true,
-  imports: [CommonModule, MatTabGroup, MatTab, CreateLocationFormComponent],
+  imports: [
+    CommonModule,
+    MatTabGroup,
+    MatTab,
+    CreateLocationModalComponent,
+    MatFabButton,
+    MatIcon,
+    MatTooltip
+  ],
   templateUrl: './location-management-page.component.html',
   styleUrl: './location-management-page.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LocationService]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocationManagementPageComponent {
-  constructor(private readonly locationService: LocationService) {}
+  constructor(private readonly store: Store) {}
 
-  createLocation(request: CreateLocationRequest): void {
-    this.locationService.createLocation(request).subscribe(() => {
-      console.log();
-    });
+  openCreateLocationDialog() {
+    this.store.dispatch(startAddingLocation());
   }
 }

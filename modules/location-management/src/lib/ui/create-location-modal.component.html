@@ -1,8 +1,4 @@
-<form
-  class="create-location-form__form"
-  [formGroup]="formGroup"
-  (ngSubmit)="createLocation()"
->
+<form class="create-location-form__form" [formGroup]="formGroup">
   <div class="form-row">
     <mat-form-field style="width: 100%">
       <mat-label>Location name</mat-label>
@@ -14,7 +10,7 @@
       />
     </mat-form-field>
   </div>
-  <h1 class="form-section">Address</h1>
+  <h1 class="form-section-label">Address</h1>
   <div
     class="form-row"
     id="street-row"
@@ -68,7 +64,7 @@
       />
     </mat-form-field>
   </div>
-  <h1 class="form-section">Opening hours</h1>
+  <h1 class="form-section-label">Opening hours</h1>
   @for (control of openingHoursFormGroups; track control; let index = $index) {
   <deskly-opening-hours-input
     [formGroup]="control"
@@ -79,11 +75,14 @@
     <button
       mat-button
       color="primary"
-      type="submit"
+      type="button"
       [disabled]="formGroup.invalid"
+      (click)="createLocation()"
     >
       Create
     </button>
-    <button mat-button color="accent" type="reset">Cancel</button>
+    <button mat-button color="accent" type="button" (click)="cancel()">
+      Cancel
+    </button>
   </div>
 </form>
