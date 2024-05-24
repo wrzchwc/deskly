@@ -8,7 +8,7 @@ import {
 } from './location.actions';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateLocationModalComponent } from '../ui/create-location-modal.component';
-import { catchError, filter, map, of, switchMap, tap } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs';
 import { LocationApiClientService } from './location-api-client.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -42,8 +42,9 @@ export class LocationEffects {
       switchMap(({ config }) =>
         this.locationApiClientService.createLocation(config)
       ),
-      map(() => addLocationSuccess()),
-      catchError(() => of(addLocationFailure()))
+      map((response) =>
+        response ? addLocationSuccess() : addLocationFailure()
+      )
     )
   );
 

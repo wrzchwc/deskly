@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { Location } from './location.model';
 import { CreateLocationConfig } from '../ui/create-location-modal.component';
 import { LocationApiTransformerService } from './location-api-transformer.service';
@@ -14,8 +14,12 @@ export class LocationApiClientService {
     private readonly locationApiTransformer: LocationApiTransformerService
   ) {}
 
-  createLocation(config: CreateLocationConfig): Observable<Location> {
+  createLocation(
+    config: CreateLocationConfig
+  ): Observable<Location | undefined> {
     const request = this.locationApiTransformer.transform(config);
-    return this.httpClient.post<Location>(this.baseUrl, request);
+    return this.httpClient
+      .post<Location>(this.baseUrl, request)
+      .pipe(catchError(() => of(undefined)));
   }
 }

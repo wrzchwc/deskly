@@ -6,14 +6,16 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideStoreDevtools({logOnly: !isDevMode(), maxAge: 25}),
+    provideStoreDevtools({ logOnly: !isDevMode(), maxAge: 25 }),
     provideEffects(),
     provideStore(),
     provideRouter(ROUTES),
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { panelClass: 'deskly-snackbar' } }
   ]
 };

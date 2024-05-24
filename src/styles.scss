@@ -5,3 +5,17 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   padding: 2rem;
 }
+
+.deskly-snackbar.mat-mdc-snack-bar-container{
+  margin-bottom: 4rem;
+
+  .mdc-snackbar__label {
+    color: #3f51b5;
+  }
+
+  .mdc-snackbar__surface {
+    background-color: var(--mdc-fab-container-color);
+  }
+}
+
+//.mat-mdc-button.mat
