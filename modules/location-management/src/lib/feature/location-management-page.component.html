@@ -1,5 +1,10 @@
 <main class="location-management-page__main-container">
-  <span>Table with locations</span>
+  <h1 class="header">Locations</h1>
+  @defer (when !isLoading()) {
+  <deskly-locations-table [previews]="previews()"></deskly-locations-table>
+  } @placeholder {
+  <mat-spinner class="spinner"></mat-spinner>
+  }
   <button
     mat-fab
     color="primary"

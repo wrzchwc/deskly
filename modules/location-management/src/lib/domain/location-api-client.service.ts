@@ -22,4 +22,10 @@ export class LocationApiClientService {
       .post<Location>(this.baseUrl, request)
       .pipe(catchError(() => of(undefined)));
   }
+
+  fetchLocations(): Observable<Location[] | undefined> {
+    return this.httpClient
+      .get<Location[]>(`${this.baseUrl}s`)
+      .pipe(catchError(() => of(undefined)));
+  }
 }

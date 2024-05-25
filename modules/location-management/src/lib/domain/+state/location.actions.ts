@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateLocationConfig } from '../ui/create-location-modal.component';
+import { CreateLocationConfig } from '../../ui/create-location-modal.component';
+import { Location } from '../location.model';
 
 export const startAddingLocation = createAction(
   '[Locations] Start adding location'
@@ -11,9 +12,17 @@ export const addLocation = createAction(
 );
 
 export const addLocationSuccess = createAction(
-  '[Locations] Add location success'
+  '[Locations] Add location success',
+  props<{ readonly location: Location }>()
 );
 
 export const addLocationFailure = createAction(
   '[Locations] Add location failure'
+);
+
+export const fetchLocations = createAction('[Locations] Fetch locations');
+
+export const setLocations = createAction(
+  '[Locations] Set locations',
+  props<{ readonly locations: Location[] }>()
 );

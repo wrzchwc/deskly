@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { Route, Title } from '@deskly/constants';
 
-export const ROUTES: Routes = [
+export const APP_ROUTES: Routes = [
   {
     path: '',
     redirectTo: Route.LOCATION_MANAGEMENT,

@@ -4,8 +4,11 @@ export interface CreateLocationRequest {
   readonly hours: Record<WeekDay, [OpeningHours]>;
 }
 
-export interface Location extends CreateLocationRequest {
+export interface Location {
   readonly id: string;
+  readonly name: string;
+  readonly address: Address;
+  readonly hours: Record<WeekDay, [OpeningHours]>;
 }
 
 export interface Address {
@@ -28,4 +31,10 @@ export type WeekDay =
 export interface OpeningHours {
   readonly start: string;
   readonly finish: string;
+}
+
+export interface LocationPreview {
+  readonly id: string;
+  readonly name: string;
+  readonly city: string;
 }
