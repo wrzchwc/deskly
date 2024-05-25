@@ -1,0 +1,9 @@
+<article class="delete-location-modal__main-container">
+  <mat-dialog-content>
+    Do you want to remove location <b>{{name}}</b> and all its resources?
+  </mat-dialog-content>
+  <mat-dialog-actions class="button-container">
+    <button mat-button mat-dialog-close color="primary">Cancel</button>
+    <button mat-button color="warn" (click)="deleteLocation()">Delete</button>
+  </mat-dialog-actions>
+</article>

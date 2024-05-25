@@ -4,7 +4,12 @@ import {
   isLoadingLocations,
   selectLocationPreviews
 } from './location.selectors';
-import { fetchLocations, startAddingLocation } from './location.actions';
+import {
+  fetchLocations,
+  startAddingLocation,
+  startDeletingLocation
+} from './location.actions';
+import { DeleteLocationModalData } from '../ui/delete-location-modal.component';
 
 @Injectable()
 export class LocationFacade {
@@ -20,5 +25,9 @@ export class LocationFacade {
 
   startAddingLocation(): void {
     this.store.dispatch(startAddingLocation());
+  }
+
+  startDeletingLocation(data: DeleteLocationModalData): void {
+    this.store.dispatch(startDeletingLocation({ data }));
   }
 }

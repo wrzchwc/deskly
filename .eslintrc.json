@@ -1,28 +1,15 @@
 {
-  "root": true,
   "env": {
     "browser": true,
     "es2020": true
   },
-  "ignorePatterns": [
-    "**/*"
-  ],
+  "ignorePatterns": ["**/*"],
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@nx",
-    "@angular-eslint",
-    "prettier",
-    "html",
-    "functional"
-  ],
+  "plugins": ["@angular-eslint", "prettier", "html", "functional"],
   "overrides": [
     {
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ],
+      "files": ["*.ts", "*.tsx"],
       "extends": [
-        "plugin:@nx/typescript",
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended"
@@ -48,10 +35,7 @@
             "allowLocalMutation": true,
             "allowMutableReturnType": true,
             "ignoreCollections": true,
-            "ignorePattern": [
-              "_",
-              "mutable"
-            ]
+            "ignorePattern": ["_", "mutable"]
           }
         ],
         "functional/no-loop-statements": "error",
@@ -81,9 +65,7 @@
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "extends": [
         "plugin:@angular-eslint/template/recommended",
         "plugin:prettier/recommended"

@@ -1,5 +1,5 @@
 {
-  "name": "@deskly/constants",
+  "name": "@deskly/shared/constants",
   "version": "0.0.1",
   "dependencies": {},
   "type": "commonjs",

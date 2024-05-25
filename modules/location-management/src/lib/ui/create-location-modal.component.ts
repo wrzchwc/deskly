@@ -9,7 +9,7 @@ import {
   OpeningHoursInputComponent
 } from './opening-hours-input.component';
 import { Address, OpeningHours, WeekDay } from '../domain/location.model';
-import { WeekDay as WeekDayLabel } from '@deskly/constants';
+import { WeekDay as WeekDayLabel } from '@deskly/shared/constants';
 import { MatDialogClose, MatDialogRef } from '@angular/material/dialog';
 
 export interface CreateLocationConfig {
@@ -92,7 +92,10 @@ export class CreateLocationModalComponent {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly matDialogRef: MatDialogRef<CreateLocationConfig>
+    private readonly matDialogRef: MatDialogRef<
+      CreateLocationModalComponent,
+      CreateLocationConfig
+    >
   ) {}
 
   createLocation(): void {

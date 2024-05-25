@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
-import { LocationEffects } from './lib/domain/+state/location.effects';
+import { LocationEffects } from './lib/domain/location.effects';
 import { LocationApiClientService } from './lib/domain/location-api-client.service';
 import { LocationApiTransformerService } from './lib/domain/location-api-transformer.service';
 import { provideState } from '@ngrx/store';
 import {
   LOCATIONS_FEATURE_KEY,
   locationsReducer
-} from './lib/domain/+state/location.reducer';
-import { LocationFacade } from './lib/domain/+state/location-facade';
+} from './lib/domain/location.reducer';
+import { LocationFacade } from './lib/domain/location-facade';
 
 export const LOCATION_ROUTES: Routes = [
   {

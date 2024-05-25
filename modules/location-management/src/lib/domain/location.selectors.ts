@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { LOCATIONS_FEATURE_KEY, LocationsState } from './location.reducer';
 import { adapter } from './location.reducer';
-import { LocationPreview } from '../location.model';
+import { LocationPreview } from './location.model';
 
 const selectFeature = createFeatureSelector<LocationsState>(
   LOCATIONS_FEATURE_KEY

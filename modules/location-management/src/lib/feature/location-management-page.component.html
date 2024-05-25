@@ -1,7 +1,10 @@
 <main class="location-management-page__main-container">
   <h1 class="header">Locations</h1>
   @defer (when !isLoading()) {
-  <deskly-locations-table [previews]="previews()"></deskly-locations-table>
+  <deskly-locations-table
+    [previews]="previews()"
+    (deleteStart)="openDeleteLocationModal($event)"
+  ></deskly-locations-table>
   } @placeholder {
   <mat-spinner class="spinner"></mat-spinner>
   }

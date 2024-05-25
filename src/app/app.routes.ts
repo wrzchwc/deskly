@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Route, Title } from '@deskly/constants';
+import { Route, Title } from '@deskly/shared/constants';
 
 export const APP_ROUTES: Routes = [
   {
@@ -10,6 +10,7 @@ export const APP_ROUTES: Routes = [
   {
     path: Route.LOCATION_MANAGEMENT,
     title: Title.LOCATION_MANAGEMENT,
-    loadChildren: async () => (await import('@deskly/location-management')).LOCATION_ROUTES,
+    loadChildren: async () =>
+      (await import('@deskly/location-management')).LOCATION_ROUTES
   }
 ];

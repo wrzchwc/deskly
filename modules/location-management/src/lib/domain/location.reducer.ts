@@ -1,7 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
-import { Location } from '../location.model';
+import { Location } from './location.model';
 import {
   addLocationSuccess,
+  deleteLocationSuccess,
   fetchLocations,
   setLocations
 } from './location.actions';
@@ -26,5 +27,6 @@ export const locationsReducer = createReducer(
     ...adapter.setAll(locations, state),
     isLoading: false
   })),
-  on(fetchLocations, (state) => ({ ...state, isLoading: true }))
+  on(fetchLocations, (state) => ({ ...state, isLoading: true })),
+  on(deleteLocationSuccess, (state, { id }) => adapter.removeOne(id, state))
 );

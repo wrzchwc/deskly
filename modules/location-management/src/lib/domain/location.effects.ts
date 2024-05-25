@@ -4,15 +4,23 @@ import {
   addLocation,
   addLocationFailure,
   addLocationSuccess,
+  deleteLocation,
+  deleteLocationFailure,
+  deleteLocationSuccess,
   fetchLocations,
   setLocations,
-  startAddingLocation
+  startAddingLocation,
+  startDeletingLocation
 } from './location.actions';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateLocationModalComponent } from '../../ui/create-location-modal.component';
+import { CreateLocationModalComponent } from '../ui/create-location-modal.component';
 import { filter, map, switchMap, tap } from 'rxjs';
-import { LocationApiClientService } from '../location-api-client.service';
+import { LocationApiClientService } from './location-api-client.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  DeleteLocationModalComponent,
+  DeleteLocationModalData
+} from '../ui/delete-location-modal.component';
 
 @Injectable()
 export class LocationEffects {
@@ -21,7 +29,8 @@ export class LocationEffects {
     private readonly matDialog: MatDialog,
     private readonly matSnackBar: MatSnackBar,
     private readonly locationApiClientService: LocationApiClientService
-  ) {}
+  ) {
+  }
 
   readonly startAddingLocation$ = createEffect(() =>
     this.actions$.pipe(
@@ -77,5 +86,55 @@ export class LocationEffects {
       filter(Boolean),
       map((locations) => setLocations({ locations }))
     )
+  );
+
+  readonly startDeleteLocation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(startDeletingLocation),
+      map(({ data }) =>
+        this.matDialog.open<
+          DeleteLocationModalComponent,
+          DeleteLocationModalData,
+          string | undefined
+        >(DeleteLocationModalComponent, {
+          data
+        })
+      ),
+      switchMap((dialogRef) => dialogRef.afterClosed()),
+      filter(Boolean),
+      map((id) => deleteLocation({ id }))
+    )
+  );
+
+  readonly deleteLocation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteLocation),
+      switchMap(({ id }) =>
+        this.locationApiClientService
+          .deleteLocation(id)
+          .pipe(map((response) => ({ response, id })))
+      ),
+      map(({ response, id }) =>
+        response ? deleteLocationSuccess({ id }) : deleteLocationFailure()
+      )
+    )
+  );
+
+  readonly deleteLocationSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(deleteLocationSuccess),
+        tap(() => this.matSnackBar.open('Location removed successfully!', 'OK'))
+      ),
+    { dispatch: false }
+  );
+
+  readonly deleteLocationFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(deleteLocationFailure),
+        tap(() => this.matSnackBar.open('Location removal failed!', 'OK'))
+      ),
+    { dispatch: false }
   );
 }

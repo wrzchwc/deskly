@@ -20,7 +20,12 @@
       <button mat-icon-button color="primary" matTooltip="Add resource">
         <mat-icon>add</mat-icon>
       </button>
-      <button mat-icon-button color="warn" matTooltip="Delete location">
+      <button
+        mat-icon-button
+        color="warn"
+        matTooltip="Delete location"
+        (click)="deleteLocation(preview.id, preview.name)"
+      >
         <mat-icon>delete</mat-icon>
       </button>
     </td>

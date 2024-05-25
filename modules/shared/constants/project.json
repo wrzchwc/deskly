@@ -1,7 +1,7 @@
 {
-  "name": "constants",
+  "name": "shared-constants",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "modules/shared/constantns/src",
+  "sourceRoot": "modules/shared/constants/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -9,9 +9,9 @@
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/modules/shared/constantns",
-        "main": "modules/shared/constantns/src/index.ts",
-        "tsConfig": "modules/shared/constantns/tsconfig.lib.json",
+        "outputPath": "dist/modules/shared/constants",
+        "main": "modules/shared/constants/src/index.ts",
+        "tsConfig": "modules/shared/constants/tsconfig.lib.json",
         "assets": [],
         "generatePackageJson": true,
         "format": ["cjs"]

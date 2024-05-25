@@ -4,9 +4,10 @@ import { CreateLocationModalComponent } from '../ui/create-location-modal.compon
 import { MatFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
-import { LocationFacade } from '../domain/+state/location-facade';
+import { LocationFacade } from '../domain/location-facade';
 import { LocationsTableComponent } from '../ui/locations-table.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { DeleteLocationModalData } from '../ui/delete-location-modal.component';
 
 @Component({
   selector: 'deskly-location-management-page',
@@ -36,5 +37,9 @@ export class LocationManagementPageComponent implements OnInit {
 
   openCreateLocationDialog() {
     this.locationFacade.startAddingLocation();
+  }
+
+  openDeleteLocationModal(data: DeleteLocationModalData) {
+    this.locationFacade.startDeletingLocation(data);
   }
 }
