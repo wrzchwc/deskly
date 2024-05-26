@@ -1,0 +1,63 @@
+<form class="add-resources-modal__main-container" [formGroup]="formRecord">
+  <div class="top-inputs-container">
+    <mat-form-field id="resource-type">
+      <mat-label>Resource type</mat-label>
+      <mat-select formControlName="type">
+        @for(option of options; track option.value) {
+        <mat-option [value]="option.value">{{option.label}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="numeric-form-field">
+      <mat-label>Quantity</mat-label>
+      <input type="number" matInput formControlName="quantity" min="1" />
+    </mat-form-field>
+    <mat-form-field id="resource-name">
+      <mat-label>Resource name</mat-label>
+      <input type="text" matInput formControlName="name" />
+    </mat-form-field>
+  </div>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Photo URLs (space separated)</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+  <div class="metadata-container" [formGroup]="metadataFormGroup">
+    @if(isResourceTypeRoom$ | async) {
+    <mat-form-field class="numeric-form-field">
+      <mat-label>Capacity</mat-label>
+      <input type="number" matInput min="1" formControlName="capacity" />
+    </mat-form-field>
+    } @else if (isResourceTypeObject$ | async) {
+    <mat-form-field>
+      <mat-label>Manufacturer</mat-label>
+      <input type="text" matInput formControlName="manufacturer" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Model</mat-label>
+      <input type="text" matInput formControlName="model" />
+    </mat-form-field>
+    } @if (isResourceTypeAudioVideoDevice$ | async) {
+    <mat-form-field>
+      <mat-label>Serial number</mat-label>
+      <input type="text" matInput formControlName="serialNumber" />
+    </mat-form-field>
+    }
+  </div>
+  <mat-dialog-actions>
+    <button
+      mat-button
+      color="primary"
+      type="button"
+      [disabled]="formRecord.invalid"
+    >
+      Add
+    </button>
+    <button mat-button color="warn" mat-dialog-close type="button">
+      Cancel
+    </button>
+  </mat-dialog-actions>
+</form>

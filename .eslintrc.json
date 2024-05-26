@@ -76,5 +76,6 @@
         "@angular-eslint/template/eqeqeq": "error"
       }
     }
-  ]
+  ],
+  "extends": ["./.eslintrc.base.json"]
 }

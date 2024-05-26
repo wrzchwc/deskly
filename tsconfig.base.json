@@ -22,8 +22,11 @@
     "useDefineForClassFields": false,
     "baseUrl": ".",
     "paths": {
-      "@deskly/location-management": [
-        "modules/location-management/src/index.ts"
+      "@deskly/location-management/location": [
+        "modules/location-management/location/src/index.ts"
+      ],
+      "@deskly/location-management/resources": [
+        "modules/location-management/resources/src/index.ts"
       ],
       "@deskly/shared/constants": ["modules/shared/constants/src/index.ts"],
       "@deskly/shared/rxjs-operators": [

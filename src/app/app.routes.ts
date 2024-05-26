@@ -11,6 +11,6 @@ export const APP_ROUTES: Routes = [
     path: Route.LOCATION_MANAGEMENT,
     title: Title.LOCATION_MANAGEMENT,
     loadChildren: async () =>
-      (await import('@deskly/location-management')).LOCATION_ROUTES
+      (await import('@deskly/location-management/location')).LOCATION_ROUTES
   }
 ];

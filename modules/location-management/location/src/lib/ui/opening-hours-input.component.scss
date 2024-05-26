@@ -1,0 +1,16 @@
+.opening-hours-input__main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  .day-label {
+    font-weight: 400;
+    color: #3f51b5;
+    margin-bottom: 0.5rem;
+    align-self: center;
+  }
+
+  .hour-input-field {
+    max-width: 5.75rem;
+  }
+}

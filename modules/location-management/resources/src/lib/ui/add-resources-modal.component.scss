@@ -1,0 +1,34 @@
+.add-resources-modal__main-container {
+  margin: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  .top-inputs-container {
+    display: flex;
+    gap: 1.5rem;
+
+    #resource-type {
+      flex: 1;
+    }
+
+    #quantity {
+      max-width: 7rem;
+    }
+
+    #resource-name {
+      flex: 3;
+    }
+  }
+
+  .metadata-container {
+    display: flex;
+    gap: 1.5rem;
+    & > *{
+      flex-grow: 1
+    }
+  }
+
+  & .numeric-form-field {
+    max-width: 7rem;
+  }
+}
