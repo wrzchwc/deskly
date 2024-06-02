@@ -97,7 +97,7 @@ export class AddResourcesModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.foo$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((type) => {
+    this.type$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((type) => {
       const controlName = 'metadata';
       this.formRecord.removeControl(controlName);
       if (this.resourceTypeService.isRoom(type)) {
@@ -110,20 +110,20 @@ export class AddResourcesModalComponent implements OnInit {
     });
   }
 
-  private readonly foo$ = (
+  private readonly type$ = (
     this.formRecord.controls['type'] as FormControl<ResourceType>
   ).valueChanges.pipe(startWith(this.INITIAL_TYPE));
 
-  readonly isResourceTypeRoom$: Observable<boolean> = this.foo$.pipe(
+  readonly isResourceTypeRoom$: Observable<boolean> = this.type$.pipe(
     map((type) => this.resourceTypeService.isRoom(type))
   );
 
   readonly isResourceTypeAudioVideoDevice$: Observable<boolean> =
-    this.foo$.pipe(
+    this.type$.pipe(
       map((type) => this.resourceTypeService.isAudioVideoDevice(type))
     );
 
-  readonly isResourceTypeObject$: Observable<boolean> = this.foo$.pipe(
+  readonly isResourceTypeObject$: Observable<boolean> = this.type$.pipe(
     map((type) => this.resourceTypeService.isObject(type))
   );
 
