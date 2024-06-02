@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatButton } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   OpeningHoursFormGroup,
@@ -10,7 +10,7 @@ import {
 } from './opening-hours-input.component';
 import { Address, OpeningHours, WeekDay } from '../domain/location.model';
 import { WeekDay as WeekDayLabel } from '@deskly/shared/constants';
-import { MatDialogActions, MatDialogClose, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 export interface CreateLocationConfig {
   readonly name: string;
@@ -23,14 +23,12 @@ export interface CreateLocationConfig {
   standalone: true,
   imports: [
     CommonModule,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatButton,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     ReactiveFormsModule,
     OpeningHoursInputComponent,
-    MatDialogClose,
-    MatDialogActions
+    MatDialogModule
   ],
   templateUrl: './create-location-modal.component.html',
   styleUrl: './create-location-modal.component.scss',

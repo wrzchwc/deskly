@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateLocationModalComponent } from '../ui/create-location-modal.component';
-import { MatFabButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { MatTooltip } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { LocationFacade } from '../domain/location-facade';
 import { LocationsTableComponent } from '../ui/locations-table.component';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeleteLocationModalData } from '../ui/delete-location-modal.component';
 import { ResourcesFacade } from '@deskly/location-management/resources';
 
@@ -16,11 +16,11 @@ import { ResourcesFacade } from '@deskly/location-management/resources';
   imports: [
     CommonModule,
     CreateLocationModalComponent,
-    MatFabButton,
-    MatIcon,
-    MatTooltip,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
     LocationsTableComponent,
-    MatProgressSpinner
+    MatProgressSpinnerModule
   ],
   templateUrl: './location-management-page.component.html',
   styleUrl: './location-management-page.component.scss',

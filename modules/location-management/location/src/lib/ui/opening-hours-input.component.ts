@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { WeekDay } from '@deskly/shared/constants';
 
 export type OpeningHoursFormGroup = FormGroup<{
@@ -21,10 +20,8 @@ export type OpeningHoursFormGroup = FormGroup<{
   standalone: true,
   imports: [
     CommonModule,
-    MatFormField,
-    FormsModule,
-    MatInput,
-    MatLabel,
+    MatFormFieldModule,
+    MatInputModule,
     ReactiveFormsModule
   ],
   templateUrl: './opening-hours-input.component.html',

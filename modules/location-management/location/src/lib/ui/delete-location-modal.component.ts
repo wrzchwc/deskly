@@ -2,12 +2,10 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
+  MatDialogModule,
   MatDialogRef
 } from '@angular/material/dialog';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 
 export interface DeleteLocationModalData {
   readonly id: string;
@@ -17,13 +15,7 @@ export interface DeleteLocationModalData {
 @Component({
   selector: 'deskly-delete-location-modal',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatDialogContent,
-    MatDialogActions,
-    MatButton,
-    MatDialogClose
-  ],
+  imports: [CommonModule, MatButtonModule, MatDialogModule],
   templateUrl: './delete-location-modal.component.html',
   styleUrl: './delete-location-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -5,16 +5,12 @@ import {
   OnInit
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent
-} from '@angular/material/dialog';
-import { MatButton } from '@angular/material/button';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatOption, MatSelect } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { ResourceType } from '../domain/resources.model';
-import { MatInput } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import {
   FormBuilder,
   FormControl,
@@ -26,6 +22,7 @@ import {
 import { map, Observable, startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ResourceTypeService } from '../domain/resource-type.service';
+import { MatOptionModule } from '@angular/material/core';
 
 interface SelectOption {
   readonly label: string;
@@ -37,15 +34,12 @@ interface SelectOption {
   standalone: true,
   imports: [
     CommonModule,
-    MatDialogActions,
-    MatButton,
-    MatDialogClose,
-    MatFormField,
-    MatLabel,
-    MatSelect,
-    MatOption,
-    MatDialogContent,
-    MatInput,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatInputModule,
     ReactiveFormsModule
   ],
   templateUrl: './add-resources-modal.component.html',
