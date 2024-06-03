@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Location } from './location.model';
-import { CreateLocationConfig } from '../ui/create-location-modal.component';
+import { CreateLocationConfig, Location } from './location.model';
 import { LocationApiTransformerService } from './location-api-transformer.service';
 import { httpError } from '@deskly/shared/rxjs-operators';
 

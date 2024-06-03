@@ -6,7 +6,7 @@ import { startAddingResources } from './resources.actions';
 export class ResourcesFacade {
   constructor(private readonly store: Store) {}
 
-  startAddingResources(): void {
-    this.store.dispatch(startAddingResources());
+  startAddingResources(locationId: string): void {
+    this.store.dispatch(startAddingResources({ locationId }));
   }
 }

@@ -1,15 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
+  DestroyRef, Inject,
   OnInit
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { ResourceType } from '../domain/resources.model';
+import {
+  CreateResourceConfig,
+  CreateResourceRequest,
+  ResourceType
+} from '../domain/resources.model';
 import { MatInputModule } from '@angular/material/input';
 import {
   FormBuilder,
@@ -93,7 +97,12 @@ export class AddResourcesModalComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly destroyRef: DestroyRef,
-    private readonly resourceTypeService: ResourceTypeService
+    private readonly resourceTypeService: ResourceTypeService,
+    private readonly matDialogRef: MatDialogRef<
+      AddResourcesModalComponent,
+      CreateResourceConfig
+    >,
+    @Inject(MAT_DIALOG_DATA) private readonly locationId: string
   ) {}
 
   ngOnInit(): void {
@@ -129,5 +138,15 @@ export class AddResourcesModalComponent implements OnInit {
 
   get metadataFormGroup(): FormGroup {
     return this.formRecord.controls['metadata'] as FormGroup;
+  }
+
+  addResource() {
+    this.matDialogRef.close({
+      request: {
+        ...(this.formRecord.value as CreateResourceRequest),
+        photos: (this.formRecord.value['photos'] as string).split(' ')
+      },
+      locationId: this.locationId
+    });
   }
 }

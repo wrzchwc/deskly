@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateLocationConfig } from '../ui/create-location-modal.component';
-import { Location } from './location.model';
+import { CreateLocationConfig, Location } from './location.model';
 import { DeleteLocationModalData } from '../ui/delete-location-modal.component';
 
 const prefix = '[Location Management/Locations]';

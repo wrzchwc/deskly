@@ -9,6 +9,7 @@ import {
   locationsReducer
 } from './lib/domain/location.reducer';
 import { ResourcesEffects } from '@deskly/location-management/resources';
+import { ResourceApiClientService } from '@deskly/location-management/resources';
 
 export const LOCATION_ROUTES: Routes = [
   {
@@ -20,7 +21,8 @@ export const LOCATION_ROUTES: Routes = [
       provideState({ name: LOCATIONS_FEATURE_KEY, reducer: locationsReducer }),
       provideEffects(LocationEffects, ResourcesEffects),
       LocationApiClientService,
-      LocationApiTransformerService
+      LocationApiTransformerService,
+      ResourceApiClientService
     ]
   }
 ];

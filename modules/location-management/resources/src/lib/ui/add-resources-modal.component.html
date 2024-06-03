@@ -23,7 +23,7 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Photo URLs (space separated)</mat-label>
-    <textarea matInput></textarea>
+    <textarea matInput formControlName="photos"></textarea>
   </mat-form-field>
   <div class="metadata-container" [formGroup]="metadataFormGroup">
     @if(isResourceTypeRoom$ | async) {
@@ -53,6 +53,7 @@
       color="primary"
       type="button"
       [disabled]="formRecord.invalid"
+      (click)="addResource()"
     >
       Add
     </button>

@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CreateLocationRequest, OpeningHours, WeekDay } from './location.model';
-import { CreateLocationConfig } from '../ui/create-location-modal.component';
+import {
+  CreateLocationConfig,
+  CreateLocationRequest,
+  OpeningHours,
+  WeekDay
+} from './location.model';
 
 @Injectable()
 export class LocationApiTransformerService {

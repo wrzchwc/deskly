@@ -4,7 +4,7 @@
   <deskly-locations-table
     [previews]="previews()"
     (deleteStart)="openDeleteLocationModal($event)"
-    (addResources)="openAddResourcesModal()"
+    (addResources)="openAddResourcesModal($event)"
   ></deskly-locations-table>
   } @placeholder {
   <mat-spinner class="spinner"></mat-spinner>

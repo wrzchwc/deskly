@@ -48,7 +48,7 @@ export class LocationManagementPageComponent implements OnInit {
     this.locationFacade.startDeletingLocation(data);
   }
 
-  openAddResourcesModal() {
-    this.resourcesFacade.startAddingResources();
+  openAddResourcesModal(locationId: string) {
+    this.resourcesFacade.startAddingResources(locationId);
   }
 }

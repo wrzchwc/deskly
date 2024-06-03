@@ -38,3 +38,9 @@ export interface LocationPreview {
   readonly name: string;
   readonly city: string;
 }
+
+export interface CreateLocationConfig {
+  readonly name: string;
+  readonly address: Address;
+  readonly hours: Record<WeekDay, OpeningHours>;
+}

@@ -21,6 +21,7 @@ import {
   DeleteLocationModalComponent,
   DeleteLocationModalData
 } from '../ui/delete-location-modal.component';
+import { modalResult } from '@deskly/shared/rxjs-operators';
 
 @Injectable()
 export class LocationEffects {
@@ -40,8 +41,7 @@ export class LocationEffects {
           maxHeight: '80vh'
         })
       ),
-      switchMap((dialog) => dialog.afterClosed()),
-      filter(Boolean),
+      modalResult(),
       map((config) => addLocation({ config }))
     )
   );
@@ -99,8 +99,7 @@ export class LocationEffects {
           data
         })
       ),
-      switchMap((dialogRef) => dialogRef.afterClosed()),
-      filter(Boolean),
+      modalResult(),
       map((id) => deleteLocation({ id }))
     )
   );

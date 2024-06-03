@@ -8,15 +8,9 @@ import {
   OpeningHoursFormGroup,
   OpeningHoursInputComponent
 } from './opening-hours-input.component';
-import { Address, OpeningHours, WeekDay } from '../domain/location.model';
 import { WeekDay as WeekDayLabel } from '@deskly/shared/constants';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-
-export interface CreateLocationConfig {
-  readonly name: string;
-  readonly address: Address;
-  readonly hours: Record<WeekDay, OpeningHours>;
-}
+import { CreateLocationConfig } from '../domain/location.model';
 
 @Component({
   selector: 'deskly-create-location-form',

@@ -1,8 +1,23 @@
+export interface CreateResourceConfig {
+  readonly request: CreateResourceRequest;
+  readonly locationId: string;
+}
+
 export interface CreateResourceRequest {
   readonly type: ResourceType;
   readonly name: string;
   readonly photos: string[];
   readonly quantity: number; // number of serialNumbers must match this value
+  readonly description: string;
+  readonly metadata: Partial<Metadata>;
+}
+
+export interface Resource {
+  readonly id: string;
+  readonly type: ResourceType;
+  readonly name: string;
+  readonly photos: string[];
+  readonly quantity: number;
   readonly description: string;
   readonly metadata: Partial<Metadata>;
 }

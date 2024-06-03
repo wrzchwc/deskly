@@ -29,7 +29,7 @@ export class LocationsTableComponent {
   readonly previews = input<LocationPreview[]>([]);
 
   readonly deleteStart = output<DeleteLocationModalData>();
-  readonly addResources = output();
+  readonly addResources = output<string>();
 
   readonly displayedColumns = ['id', 'name', 'city', 'options'];
 
@@ -37,7 +37,7 @@ export class LocationsTableComponent {
     this.deleteStart.emit({ id, name });
   }
 
-  onAddResources(): void {
-    this.addResources.emit();
+  onAddResources(id: string): void {
+    this.addResources.emit(id);
   }
 }
