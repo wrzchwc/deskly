@@ -74,4 +74,8 @@ export class LocationInformationPageComponent implements OnInit {
   fetchResources() {
     this.resourcesFacade.fetchResources(this.locationId());
   }
+
+  addResource() {
+    this.resourcesFacade.startAddingResources(this.locationId());
+  }
 }

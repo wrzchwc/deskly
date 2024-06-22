@@ -49,10 +49,16 @@ export class ResourcesEffects {
     this.actions$.pipe(
       ofType(addResource),
       switchMap(({ config }) =>
-        this.resourceApiClientService.addResource(config)
-      ),
-      map((response) =>
-        response ? addResourceSuccess() : addResourceFailure()
+        this.resourceApiClientService.addResource(config).pipe(
+          map((response) =>
+            response
+              ? addResourceSuccess({
+                  resource: response,
+                  locationId: config.locationId
+                })
+              : addResourceFailure()
+          )
+        )
       )
     )
   );

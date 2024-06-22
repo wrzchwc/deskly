@@ -14,7 +14,8 @@ export const addResource = createAction(
 );
 
 export const addResourceSuccess = createAction(
-  `${prefix} Add resource success`
+  `${prefix} Add resource success`,
+  props<{ readonly resource: ResourceResponse; readonly locationId: string }>()
 );
 
 export const addResourceFailure = createAction(

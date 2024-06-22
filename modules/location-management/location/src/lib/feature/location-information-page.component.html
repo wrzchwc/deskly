@@ -33,7 +33,9 @@
               Manage
             </button>
             <mat-menu #beforeMenu="matMenu" xPosition="before">
-              <button mat-menu-item>Add resource</button>
+              <button mat-menu-item (click)="addResource()">
+                Add resource
+              </button>
               <button mat-menu-item>Remove location</button>
             </mat-menu>
           </div>
