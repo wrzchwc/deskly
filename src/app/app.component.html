@@ -1,1 +1,13 @@
-<router-outlet/>
+<deskly-header class="app__header" (menuClick)="drawer.toggle()"></deskly-header>
+<main class="app__main-container">
+  <mat-drawer-container autosize class="drawer-container">
+    <mat-drawer #drawer mode="side" class="drawer">
+      <button mat-button color="primary" routerLink="/location-management" (click)="drawer.toggle()">Locations</button>
+    </mat-drawer>
+    <div style="padding: 2rem">
+      <router-outlet />
+    </div>
+  </mat-drawer-container>
+</main>
+
+

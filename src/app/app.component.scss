@@ -1,0 +1,21 @@
+.app__header {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  z-index: 2;
+}
+
+.app__main-container{
+  padding: 4rem 0 0;
+  height: 100%;
+  box-sizing: border-box;
+
+  .drawer-container {
+    height: 100%;
+    background: white;
+
+    .drawer {
+      padding: 1rem;
+    }
+  }
+}
