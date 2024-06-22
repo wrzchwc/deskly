@@ -27,6 +27,9 @@ import {
 import { modalResult } from '@deskly/shared/rxjs-operators';
 import { Store } from '@ngrx/store';
 import { currentLocationId } from './location.selectors';
+import { navigateToPage } from '@deskly/shared/navigation';
+import { Route } from '@deskly/shared/navigation';
+import { selectUrl } from '@deskly/shared/navigation';
 
 @Injectable()
 export class LocationEffects {
@@ -148,6 +151,16 @@ export class LocationEffects {
         tap(() => this.matSnackBar.open('Location removed successfully!', 'OK'))
       ),
     { dispatch: false }
+  );
+
+  readonly navigateToLocationManagementPage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteLocationSuccess),
+      withLatestFrom(this.store.select(selectUrl)),
+      map(([, url]) => url.slice(1)),
+      filter((url) => url !== Route.LOCATION_MANAGEMENT),
+      map(() => navigateToPage({ route: Route.LOCATION_MANAGEMENT }))
+    )
   );
 
   readonly deleteLocationFailure$ = createEffect(

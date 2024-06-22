@@ -29,6 +29,7 @@
         "modules/location-management/resources/src/index.ts"
       ],
       "@deskly/shared/constants": ["modules/shared/constants/src/index.ts"],
+      "@deskly/shared/navigation": ["modules/shared/navigation/src/index.ts"],
       "@deskly/shared/rxjs-operators": [
         "modules/shared/rxjs-operators/src/index.ts"
       ]

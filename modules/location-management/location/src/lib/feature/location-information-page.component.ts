@@ -78,4 +78,11 @@ export class LocationInformationPageComponent implements OnInit {
   addResource() {
     this.resourcesFacade.startAddingResources(this.locationId());
   }
+
+  removeLocation() {
+    this.locationFacade.startDeletingLocation({
+      id: this.locationId(),
+      name: this.location()?.name || ''
+    });
+  }
 }

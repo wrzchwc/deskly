@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Route, Title } from '@deskly/shared/constants';
+import { Route, Title } from '@deskly/shared/navigation';
 
 export const APP_ROUTES: Routes = [
   {
