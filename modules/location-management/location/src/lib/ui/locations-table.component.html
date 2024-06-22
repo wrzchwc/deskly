@@ -5,7 +5,9 @@
   </ng-container>
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>NAME</th>
-    <td mat-cell *matCellDef="let preview">{{ preview.name }}</td>
+    <td mat-cell *matCellDef="let preview">
+      <a [routerLink]="preview.id">{{ preview.name }}</a>
+    </td>
   </ng-container>
   <ng-container matColumnDef="city">
     <th mat-header-cell *matHeaderCellDef>CITY</th>

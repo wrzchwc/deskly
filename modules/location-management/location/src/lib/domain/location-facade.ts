@@ -1,26 +1,52 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
+  selectCurrentLocation,
   isLoadingLocations,
-  selectLocationPreviews
+  selectLocationPreviews,
+  selectHotDesksForCurrentLocation,
+  selectConferenceRoomsForCurrentLocation
 } from './location.selectors';
 import {
+  fetchLocation,
   fetchLocations,
   startAddingLocation,
   startDeletingLocation
 } from './location.actions';
 import { DeleteLocationModalData } from '../ui/delete-location-modal.component';
+import {
+  selectAudioVideoDevices,
+  selectPrivateDesks,
+  selectPrivateRooms
+} from '@deskly/location-management/resources';
 
 @Injectable()
 export class LocationFacade {
-  constructor(private readonly store: Store) {}
-
   readonly previews = this.store.selectSignal(selectLocationPreviews);
+  readonly isLoadingInProgress = this.store.selectSignal(isLoadingLocations);
+  readonly currentLocation = this.store.selectSignal(selectCurrentLocation);
+  readonly currentLocationHotDesks = this.store.selectSignal(
+    selectHotDesksForCurrentLocation
+  );
+  readonly currentLocationConferenceRooms = this.store.selectSignal(
+    selectConferenceRoomsForCurrentLocation
+  );
+  readonly currentLocationAudioVideoDevices = this.store.selectSignal(
+    selectAudioVideoDevices
+  );
+  readonly currentLocationPrivateDesks =
+    this.store.selectSignal(selectPrivateDesks);
+  readonly currentLocationPrivateRooms =
+    this.store.selectSignal(selectPrivateRooms);
 
-  readonly isLoadingLocations = this.store.selectSignal(isLoadingLocations);
+  constructor(private readonly store: Store) {}
 
   fetchLocations(): void {
     this.store.dispatch(fetchLocations());
+  }
+
+  fetchLocation(locationId: string): void {
+    this.store.dispatch(fetchLocation({ locationId }));
   }
 
   startAddingLocation(): void {

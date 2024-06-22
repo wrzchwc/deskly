@@ -1,0 +1,66 @@
+<section class="location-information-page__main-container">
+  @if (isLoading()) {
+  <article class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </article>
+  } @else if (!isLoading() && !location()) {
+  <span>Location not found!</span>
+  } @else {
+  <div class="wrapper">
+    <div class="details-container">
+      <mat-card class="general-details">
+        <mat-card-content class="content">
+          <div class="left">
+            <div>
+              <h1 class="header">{{location()?.name}}</h1>
+              <span>id: {{location()?.id}}</span>
+            </div>
+            <div class="bottom">
+              <h2 class="header">address</h2>
+              <span>
+                {{address()?.street}} {{address()?.streetNumber}} /
+                {{address()?.flatNumber}}
+              </span>
+              <span>{{address()?.zipCode}} {{address()?.city}}</span>
+            </div>
+          </div>
+          <div class="right">
+            <button
+              mat-flat-button
+              color="primary"
+              [matMenuTriggerFor]="beforeMenu"
+            >
+              Manage
+            </button>
+            <mat-menu #beforeMenu="matMenu" xPosition="before">
+              <button mat-menu-item>Add resource</button>
+              <button mat-menu-item>Remove location</button>
+            </mat-menu>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="opening-hours-details">
+        <mat-card-content class="opening-hours-content">
+          <h1 class="header">opening hours</h1>
+          <div class="opening-hours-container">
+            @for(data of openingHoursData(); track data.day) {
+            <deskly-opening-hours-preview
+              [day]="data.day"
+              [openingHours]="data.hours"
+            ></deskly-opening-hours-preview>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <deskly-resources-preview
+      [conferenceRooms]="conferenceRooms()"
+      [hotDesks]="hotDesks()"
+      [audioVideoDevices]="audioVideoDevices()"
+      [privateRooms]="privateRooms()"
+      [privateDesks]="privateDesks()"
+      (openPreview)="fetchResources()"
+    ></deskly-resources-preview>
+  </div>
+  }
+</section>

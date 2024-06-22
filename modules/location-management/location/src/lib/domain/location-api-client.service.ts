@@ -29,6 +29,12 @@ export class LocationApiClientService {
       .pipe(httpError());
   }
 
+  fetchLocation(locationId: string): Observable<Location | undefined> {
+    return this.httpClient
+      .get<Location>(`${this.baseUrl}/${locationId}`)
+      .pipe(httpError());
+  }
+
   deleteLocation(locationId: string) {
     return this.httpClient
       .delete(`${this.baseUrl}/${locationId}`)

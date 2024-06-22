@@ -1,0 +1,9 @@
+.opening-hours-preview__main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  .day-label {
+    font-weight: bold;
+  }
+}

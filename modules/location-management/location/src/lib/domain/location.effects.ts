@@ -7,14 +7,17 @@ import {
   deleteLocation,
   deleteLocationFailure,
   deleteLocationSuccess,
+  fetchLocation,
+  fetchLocationFailure,
   fetchLocations,
+  fetchLocationSuccess,
   setLocations,
   startAddingLocation,
   startDeletingLocation
 } from './location.actions';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateLocationModalComponent } from '../ui/create-location-modal.component';
-import { filter, map, switchMap, tap } from 'rxjs';
+import { filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { LocationApiClientService } from './location-api-client.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
@@ -22,6 +25,8 @@ import {
   DeleteLocationModalData
 } from '../ui/delete-location-modal.component';
 import { modalResult } from '@deskly/shared/rxjs-operators';
+import { Store } from '@ngrx/store';
+import { currentLocationId } from './location.selectors';
 
 @Injectable()
 export class LocationEffects {
@@ -29,7 +34,8 @@ export class LocationEffects {
     private readonly actions$: Actions,
     private readonly matDialog: MatDialog,
     private readonly matSnackBar: MatSnackBar,
-    private readonly locationApiClientService: LocationApiClientService
+    private readonly locationApiClientService: LocationApiClientService,
+    private readonly store: Store
   ) {}
 
   readonly startAddingLocation$ = createEffect(() =>
@@ -84,6 +90,23 @@ export class LocationEffects {
       switchMap(() => this.locationApiClientService.fetchLocations()),
       filter(Boolean),
       map((locations) => setLocations({ locations }))
+    )
+  );
+
+  readonly fetchLocation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fetchLocation),
+      withLatestFrom(this.store.select(currentLocationId)),
+      switchMap(([, locationId]) =>
+        locationId
+          ? this.locationApiClientService.fetchLocation(locationId)
+          : of(undefined)
+      ),
+      map((response) =>
+        response
+          ? fetchLocationSuccess({ location: response })
+          : fetchLocationFailure()
+      )
     )
   );
 

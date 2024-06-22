@@ -4,6 +4,9 @@ import {
   addResource,
   addResourceFailure,
   addResourceSuccess,
+  fetchResources,
+  fetchResourcesFailure,
+  fetchResourcesSuccess,
   startAddingResources
 } from './resources.actions';
 import { map, switchMap, tap } from 'rxjs';
@@ -70,5 +73,22 @@ export class ResourcesEffects {
         tap(() => this.matSnackBar.open('Resource adding failure!', 'OK'))
       ),
     { dispatch: false }
+  );
+
+  readonly fetchResources$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fetchResources),
+      switchMap(({ locationId }) =>
+        this.resourceApiClientService
+          .fetchResources(locationId)
+          .pipe(
+            map((response) =>
+              response
+                ? fetchResourcesSuccess({ resources: response, locationId })
+                : fetchResourcesFailure()
+            )
+          )
+      )
+    )
   );
 }

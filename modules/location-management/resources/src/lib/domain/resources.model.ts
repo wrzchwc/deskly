@@ -12,7 +12,7 @@ export interface CreateResourceRequest {
   readonly metadata: Partial<Metadata>;
 }
 
-export interface Resource {
+export interface ResourceResponse {
   readonly id: string;
   readonly type: ResourceType;
   readonly name: string;
@@ -22,6 +22,14 @@ export interface Resource {
   readonly metadata: Partial<Metadata>;
 }
 
+export interface Resource extends ResourceResponse {
+  readonly locationId: string;
+}
+
+export type ResourceKey = Exclude<keyof Resource, 'metadata'>;
+
+export type MetadataKey = keyof Metadata;
+
 export enum ResourceType {
   HOT_DESK = 'HOT_DESK',
   AUDIO_VIDEO_DEVICE = 'AUDIO_VIDEO_DEVICE',
@@ -30,7 +38,7 @@ export enum ResourceType {
   CONFERENCE_ROOM = 'CONFERENCE_ROOM'
 }
 
-interface Metadata {
+export interface Metadata {
   readonly manufacturer: string; // needed for desks and devices
   readonly model: string; // needed for desks and devices
   readonly serialNumber: string; // needed for devices

@@ -24,6 +24,20 @@ export const addLocationFailure = createAction(
 
 export const fetchLocations = createAction(`${prefix} Fetch locations`);
 
+export const fetchLocation = createAction(
+  `${prefix} Fetch location`,
+  props<{ readonly locationId: string }>()
+);
+
+export const fetchLocationSuccess = createAction(
+  `${prefix} Fetch location success`,
+  props<{ readonly location: Location }>()
+);
+
+export const fetchLocationFailure = createAction(
+  `${prefix} Fetch location failure`
+);
+
 export const setLocations = createAction(
   `${prefix} Set locations`,
   props<{ readonly locations: Location[] }>()

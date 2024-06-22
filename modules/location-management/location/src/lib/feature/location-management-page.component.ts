@@ -24,12 +24,11 @@ import { ResourcesFacade } from '@deskly/location-management/resources';
   ],
   templateUrl: './location-management-page.component.html',
   styleUrl: './location-management-page.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LocationFacade, ResourcesFacade]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocationManagementPageComponent implements OnInit {
   readonly previews = this.locationFacade.previews;
-  readonly isLoading = this.locationFacade.isLoadingLocations;
+  readonly isLoading = this.locationFacade.isLoadingInProgress;
 
   constructor(
     private readonly locationFacade: LocationFacade,

@@ -1,3 +1,3 @@
 export enum Title {
-  LOCATION_MANAGEMENT = 'Deskly | Location management'
+  LOCATION_MANAGEMENT = 'deskly | Location management'
 }

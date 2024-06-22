@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateResourceConfig } from './resources.model';
+import { CreateResourceConfig, ResourceResponse } from './resources.model';
 
 const prefix = '[Location Management/Resources]';
 
@@ -19,4 +19,21 @@ export const addResourceSuccess = createAction(
 
 export const addResourceFailure = createAction(
   `${prefix} Add resource failure`
+);
+
+export const fetchResources = createAction(
+  `${prefix} Fetch resources`,
+  props<{ readonly locationId: string }>()
+);
+
+export const fetchResourcesSuccess = createAction(
+  `${prefix} Fetch resources success`,
+  props<{
+    readonly resources: ResourceResponse[];
+    readonly locationId: string;
+  }>()
+);
+
+export const fetchResourcesFailure = createAction(
+  `${prefix} Fetch resources failure`
 );

@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DeleteLocationModalData } from './delete-location-modal.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'deskly-locations-table',
@@ -20,7 +21,8 @@ import { DeleteLocationModalData } from './delete-location-modal.component';
     MatTooltipModule,
     MatTableModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterModule
   ],
   templateUrl: './locations-table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

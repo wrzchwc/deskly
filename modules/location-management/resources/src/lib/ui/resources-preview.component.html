@@ -1,0 +1,49 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="onOpen()" (closed)="onClose()">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="header">Resources</mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      <mat-tab-group>
+        <mat-tab label="Hot Desks">
+          <ng-template matTabContent>
+            <deskly-resources-table
+              [dataSource]="hotDesks()"
+              [metadataColumns]="desksMetadata"
+            ></deskly-resources-table>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Private desks">
+          <ng-template matTabContent>
+            <deskly-resources-table
+              [dataSource]="privateDesks()"
+              [metadataColumns]="desksMetadata"
+            ></deskly-resources-table>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Conference room">
+          <ng-template matTabContent>
+            <deskly-resources-table
+              [dataSource]="conferenceRooms()"
+              [metadataColumns]="roomsMetadata"
+            ></deskly-resources-table>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Private room">
+          <deskly-resources-table
+            [dataSource]="privateRooms()"
+            [metadataColumns]="roomsMetadata"
+          ></deskly-resources-table>
+        </mat-tab>
+        <mat-tab label="Audio-video devices">
+          <ng-template matTabContent>
+            <deskly-resources-table
+              [dataSource]="audioVideoDevices()"
+              [metadataColumns]="audioVideoDevicesMetadata"
+            ></deskly-resources-table>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </ng-template>
+  </mat-expansion-panel>
+</mat-accordion>
