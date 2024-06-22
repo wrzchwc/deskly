@@ -10,6 +10,7 @@
             <deskly-resources-table
               [dataSource]="hotDesks()"
               [metadataColumns]="desksMetadata"
+              (removeResource)="onRemoveResource($event)"
             ></deskly-resources-table>
           </ng-template>
         </mat-tab>
@@ -18,6 +19,7 @@
             <deskly-resources-table
               [dataSource]="privateDesks()"
               [metadataColumns]="desksMetadata"
+              (removeResource)="onRemoveResource($event)"
             ></deskly-resources-table>
           </ng-template>
         </mat-tab>
@@ -26,6 +28,7 @@
             <deskly-resources-table
               [dataSource]="conferenceRooms()"
               [metadataColumns]="roomsMetadata"
+              (removeResource)="onRemoveResource($event)"
             ></deskly-resources-table>
           </ng-template>
         </mat-tab>
@@ -33,6 +36,7 @@
           <deskly-resources-table
             [dataSource]="privateRooms()"
             [metadataColumns]="roomsMetadata"
+            (removeResource)="onRemoveResource($event)"
           ></deskly-resources-table>
         </mat-tab>
         <mat-tab label="Audio-video devices">
@@ -40,6 +44,7 @@
             <deskly-resources-table
               [dataSource]="audioVideoDevices()"
               [metadataColumns]="audioVideoDevicesMetadata"
+              (removeResource)="onRemoveResource($event)"
             ></deskly-resources-table>
           </ng-template>
         </mat-tab>

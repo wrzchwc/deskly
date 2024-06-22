@@ -85,4 +85,8 @@ export class LocationInformationPageComponent implements OnInit {
       name: this.location()?.name || ''
     });
   }
+
+  removeResource(resourceId: string) {
+    this.resourcesFacade.removeResource(resourceId, this.locationId());
+  }
 }

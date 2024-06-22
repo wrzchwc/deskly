@@ -34,7 +34,8 @@ export class ResourcesPreviewComponent {
   readonly privateDesks = input<Resource[]>([]);
   readonly privateRooms = input<Resource[]>([]);
 
-  readonly openPreview = output();
+  readonly openPreview = output<void>();
+  readonly removeResource = output<string>();
 
   readonly desksMetadata: MetadataKey[] = ['manufacturer', 'model'];
   readonly roomsMetadata: MetadataKey[] = ['capacity'];
@@ -51,6 +52,10 @@ export class ResourcesPreviewComponent {
 
   onClose() {
     this.panelOpenState.set(false);
+  }
+
+  onRemoveResource(resourceId: string) {
+    this.removeResource.emit(resourceId);
   }
 
   private readonly panelOpenState = signal(false);

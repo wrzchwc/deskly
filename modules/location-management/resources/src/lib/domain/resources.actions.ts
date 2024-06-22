@@ -38,3 +38,17 @@ export const fetchResourcesSuccess = createAction(
 export const fetchResourcesFailure = createAction(
   `${prefix} Fetch resources failure`
 );
+
+export const removeResource = createAction(
+  `${prefix} Remove resource`,
+  props<{ readonly locationId: string; readonly resourceId: string }>()
+);
+
+export const removeResourceSuccess = createAction(
+  `${prefix} Remove resource success`,
+  props<{ readonly resourceId: string }>()
+);
+
+export const removeResourceFailure = createAction(
+  `${prefix} Remove resource failure`
+);

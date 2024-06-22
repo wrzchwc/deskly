@@ -1,0 +1,15 @@
+.context-menu-container {
+  background: var(--mat-menu-container-color);
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+
+  .menu-item {
+    -webkit-font-smoothing: antialiased;
+    flex: 1;
+    white-space: normal;
+    line-height: var(--mat-menu-item-label-text-line-height);
+    font-size: var(--mat-menu-item-label-text-size);
+    letter-spacing: var(--mat-menu-item-label-text-tracking);
+    font-weight: var(--mat-menu-item-label-text-weight);
+    color: #3f51b5;
+  }
+}

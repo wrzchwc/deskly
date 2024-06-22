@@ -7,6 +7,9 @@ import {
   fetchResources,
   fetchResourcesFailure,
   fetchResourcesSuccess,
+  removeResource,
+  removeResourceFailure,
+  removeResourceSuccess,
   startAddingResources
 } from './resources.actions';
 import { map, switchMap, tap } from 'rxjs';
@@ -96,5 +99,40 @@ export class ResourcesEffects {
           )
       )
     )
+  );
+
+  readonly removeResource$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(removeResource),
+      switchMap(({ locationId, resourceId }) =>
+        this.resourceApiClientService
+          .removeResource(locationId, resourceId)
+          .pipe(
+            map((response) =>
+              response
+                ? removeResourceSuccess({ resourceId })
+                : removeResourceFailure()
+            )
+          )
+      )
+    )
+  );
+
+  readonly removeResourceSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(removeResourceSuccess),
+        tap(() => this.matSnackBar.open('Resource removed successfully!', 'OK'))
+      ),
+    { dispatch: false }
+  );
+
+  readonly removeResourceFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(removeResourceFailure),
+        tap(() => this.matSnackBar.open('Resource removal failure!', 'OK'))
+      ),
+    { dispatch: false }
   );
 }

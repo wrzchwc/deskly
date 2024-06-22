@@ -9,6 +9,10 @@ export class ResourceApiClientService {
     `/api/location/${locationId}/resource`;
   private readonly fetchResourcesUrl = (locationId: string) =>
     `/api/location/${locationId}/resources`;
+  private readonly removeResourceUrl = (
+    locationId: string,
+    resourceId: string
+  ) => `/api/location/${locationId}/resource/${resourceId}`;
 
   constructor(private readonly httpClient: HttpClient) {}
 
@@ -22,6 +26,12 @@ export class ResourceApiClientService {
   fetchResources(locationId: string) {
     return this.httpClient
       .get<ResourceResponse[] | undefined>(this.fetchResourcesUrl(locationId))
+      .pipe(httpError());
+  }
+
+  removeResource(locationId: string, resourceId: string) {
+    return this.httpClient
+      .delete(this.removeResourceUrl(locationId, resourceId))
       .pipe(httpError());
   }
 }
