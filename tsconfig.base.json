@@ -22,6 +22,7 @@
     "useDefineForClassFields": false,
     "baseUrl": ".",
     "paths": {
+      "@deskly/booking": ["modules/booking/src/index.ts"],
       "@deskly/location-management/location": [
         "modules/location-management/location/src/index.ts"
       ],

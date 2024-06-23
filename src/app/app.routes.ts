@@ -28,5 +28,11 @@ export const APP_ROUTES: Routes = [
     canActivate: [authGuard],
     loadChildren: async () =>
       (await import('@deskly/location-management/location')).LOCATION_ROUTES
+  },
+  {
+    path: Route.BOOKING,
+    title: Title.BOOKING,
+    canActivate: [authGuard],
+    loadComponent: async () => (await import('@deskly/booking')).BookingPageComponent
   }
 ];

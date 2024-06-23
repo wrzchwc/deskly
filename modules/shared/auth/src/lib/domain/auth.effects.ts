@@ -12,11 +12,12 @@ import {
   signUpFailure,
   signUpSuccess
 } from './auth.actions';
-import { map, switchMap, tap } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs';
 import { AuthApiService } from './auth-api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtService } from './jwt.service';
 import { navigateToPage, Route } from '@deskly/shared/navigation';
+import { UserRole } from './auth.model';
 
 @Injectable()
 export class AuthEffects {
@@ -56,10 +57,19 @@ export class AuthEffects {
     )
   );
 
-  readonly navigateOnSignInSuccess$ = createEffect(() =>
+  readonly navigateOnManagerSignInSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signInSuccess),
+      filter(({ role }) => role === UserRole.MANAGER),
       map(() => navigateToPage({ route: Route.LOCATION_MANAGEMENT }))
+    )
+  );
+
+  readonly navigateOnTenantSignInSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(signInSuccess),
+      filter(({ role }) => role === UserRole.TENANT),
+      map(() => navigateToPage({ route: Route.BOOKING }))
     )
   );
 
