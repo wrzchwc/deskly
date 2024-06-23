@@ -7,7 +7,10 @@ import {
   signInSuccess,
   signOut,
   signOutFailure,
-  signOutSuccess
+  signOutSuccess,
+  signUp,
+  signUpFailure,
+  signUpSuccess
 } from './auth.actions';
 import { map, switchMap, tap } from 'rxjs';
 import { AuthApiService } from './auth-api.service';
@@ -92,6 +95,43 @@ export class AuthEffects {
         ofType(signOutFailure),
         tap(() =>
           this.matSnackBar.open('Sign out failed! Please try again.', 'OK')
+        )
+      ),
+    { dispatch: false }
+  );
+
+  readonly signUp$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(signUp),
+      switchMap(({ request }) => this.authApiService.signUp(request)),
+      map((response) => (response ? signUpSuccess() : signUpFailure()))
+    )
+  );
+
+  readonly signUpSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(signUpSuccess),
+        tap(() =>
+          this.matSnackBar.open('Sign up successful! You can sign in', 'OK')
+        )
+      ),
+    { dispatch: false }
+  );
+
+  readonly navigateOnSignUpSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(signUpSuccess),
+      map(() => navigateToPage({ route: Route.SIGN_IN }))
+    )
+  );
+
+  readonly signUpFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(signUpFailure),
+        tap(() =>
+          this.matSnackBar.open('Sign up failed! Please try again', 'OK')
         )
       ),
     { dispatch: false }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { httpError } from '@deskly/shared/rxjs-operators';
 import { map } from 'rxjs';
-import { AUTH_HEADER } from './auth.model';
+import { AUTH_HEADER, SignUpRequest } from './auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,12 @@ export class AuthApiService {
   signOut() {
     return this.httpClient
       .post(`${this.baseUrl}/logout`, {}, { responseType: 'text' })
+      .pipe(httpError());
+  }
+
+  signUp(request: SignUpRequest) {
+    return this.httpClient
+      .post(`${this.baseUrl}/users`, request)
       .pipe(httpError());
   }
 }

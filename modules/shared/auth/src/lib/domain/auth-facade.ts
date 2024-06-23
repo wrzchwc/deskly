@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { signIn, signOut } from './auth.actions';
+import { signIn, signOut, signUp } from './auth.actions';
 import { isAuthenticated } from './auth.selectors';
+import { SignUpRequest } from './auth.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
@@ -15,5 +16,9 @@ export class AuthFacade {
 
   signOut() {
     this.store.dispatch(signOut());
+  }
+
+  signUp(data: SignUpRequest) {
+    this.store.dispatch(signUp({ request: data }));
   }
 }

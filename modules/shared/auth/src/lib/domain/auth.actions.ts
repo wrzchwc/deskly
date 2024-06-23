@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UserRole } from './auth.model';
+import { SignUpRequest, UserRole } from './auth.model';
 
 const prefix = '[Auth]';
 
@@ -25,3 +25,12 @@ export const signOut = createAction(`${prefix} Sign out`);
 export const signOutSuccess = createAction(`${prefix} Sign out success`);
 
 export const signOutFailure = createAction(`${prefix} Sign out failure`);
+
+export const signUp = createAction(
+  `${prefix} Sign up`,
+  props<{ readonly request: SignUpRequest }>()
+);
+
+export const signUpSuccess = createAction(`${prefix} Sign up success`);
+
+export const signUpFailure = createAction(`${prefix} Sign up failure`);

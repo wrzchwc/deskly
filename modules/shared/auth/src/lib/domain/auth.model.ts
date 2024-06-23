@@ -10,3 +10,11 @@ export enum UserRole {
 }
 
 export const AUTH_HEADER = 'Authorization';
+
+export interface SignUpRequest {
+  readonly email: string;
+  readonly password: string;
+  readonly userType: UserRole;
+  readonly name: string;
+  readonly surname: string;
+}

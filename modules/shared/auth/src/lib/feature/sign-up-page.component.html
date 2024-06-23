@@ -1,1 +1,50 @@
-<p>sign-up-page works!</p>
+<section class="sign-up-page__main-container">
+  <h1 class="header">Sign up</h1>
+  <form class="form" [formGroup]="formValues">
+    <mat-form-field>
+      <mat-label>name</mat-label>
+      <input type="text" matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>surname</mat-label>
+      <input type="text" matInput formControlName="surname" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>user type</mat-label>
+      <mat-select formControlName="userType">
+        @for(userType of userTypes; track userType) {
+        <mat-option [value]="userType">{{userType}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>email</mat-label>
+      <input type="email" matInput formControlName="email" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>password</mat-label>
+      <input type="password" matInput formControlName="password" />
+    </mat-form-field>
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      class="sign-up-button"
+      [disabled]="formValues.invalid"
+      (click)="signUp()"
+    >
+      Sign up
+    </button>
+  </form>
+  <div>
+    <span>Already have account?</span>
+    <button
+      mat-button
+      color="accent"
+      routerLink="/sign-in"
+      class="sign-in-button"
+    >
+      Sign in
+    </button>
+  </div>
+</section>
