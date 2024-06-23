@@ -1,14 +1,16 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { navigateToPage } from './navigation.actions';
-import { exhaustMap } from 'rxjs';
+import { navigateToPage, navigateToPreviousPage } from './navigation.actions';
+import { exhaustMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Injectable()
 export class NavigationEffects {
   constructor(
     private readonly actions$: Actions,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly location: Location
   ) {}
 
   readonly navigateToPage$ = createEffect(
@@ -20,5 +22,14 @@ export class NavigationEffects {
     {
       dispatch: false
     }
+  );
+
+  readonly navigateToPreviousPage$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(navigateToPreviousPage),
+        tap(() => this.location.back())
+      ),
+    { dispatch: false }
   );
 }
