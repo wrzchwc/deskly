@@ -20,7 +20,7 @@ export interface LocationsState extends EntityState<Location> {
 
 export const adapter: EntityAdapter<Location> = createEntityAdapter<Location>();
 
-export const initialState = adapter.getInitialState({
+const initialState = adapter.getInitialState({
   isLoading: false,
   selectedLocationId: undefined as string | undefined
 });

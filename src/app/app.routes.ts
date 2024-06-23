@@ -3,9 +3,19 @@ import { Route, Title } from '@deskly/shared/navigation';
 
 export const APP_ROUTES: Routes = [
   {
-    path: '',
-    redirectTo: Route.LOCATION_MANAGEMENT,
-    pathMatch: 'full'
+    path: Route.SIGN_IN,
+    title: Title.SIGN_IN,
+    loadComponent: async () => (await import('@deskly/shared/auth')).SignInPageComponent
+  },
+  {
+    path: Route.SIGN_UP,
+    title: Title.SIGN_UP,
+    loadComponent: async () => (await import('@deskly/shared/auth')).SignUpPageComponent
+  },
+  {
+    path: Route.HOME,
+    title: Title.HOME,
+    loadComponent: async () => (await import('@deskly/shared/auth')).HomePageComponent
   },
   {
     path: Route.LOCATION_MANAGEMENT,

@@ -1,0 +1,28 @@
+.sign-in-page__main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  .header {
+    color: #3f51b5;
+    font-size: 3rem;
+    margin: 0;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 25rem;
+
+    .sign-in-button {
+      align-self: center;
+    }
+  }
+
+  .sign-up-button {
+    margin-left: 1rem;
+  }
+}

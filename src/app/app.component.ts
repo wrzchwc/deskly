@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '@deskly/shared/navigation';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthFacade } from '@deskly/shared/auth';
 
 @Component({
   standalone: true,
@@ -11,4 +12,12 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {}
+export class AppComponent {
+  readonly isAuthenticated = this.authFacade.isAuthenticated;
+
+  constructor(private readonly authFacade: AuthFacade) {}
+
+  signOut() {
+    this.authFacade.signOut();
+  }
+}

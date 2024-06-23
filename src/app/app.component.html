@@ -1,10 +1,17 @@
-<deskly-header class="app__header" (menuClick)="drawer.toggle()"></deskly-header>
+<deskly-header
+  class="app__header"
+  [isAuthenticated]="isAuthenticated()"
+  (menuClick)="drawer.toggle()"
+  (signOut)="signOut()"
+></deskly-header>
 <main class="app__main-container">
   <mat-drawer-container autosize class="drawer-container">
     <mat-drawer #drawer mode="side" class="drawer">
-      <button mat-button color="primary" routerLink="/location-management" (click)="drawer.toggle()">Locations</button>
+      <button mat-button color="primary" routerLink="/location-management" (click)="drawer.toggle()">
+        Locations
+      </button>
     </mat-drawer>
-    <div style="padding: 2rem">
+    <div class="router-wrapper">
       <router-outlet />
     </div>
   </mat-drawer-container>

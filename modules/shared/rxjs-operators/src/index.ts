@@ -1,2 +1,2 @@
-export * from './lib/http';
-export * from './lib/modal';
+export * from './lib/domain/http';
+export * from './lib/domain/modal';

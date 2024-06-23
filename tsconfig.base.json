@@ -28,6 +28,7 @@
       "@deskly/location-management/resources": [
         "modules/location-management/resources/src/index.ts"
       ],
+      "@deskly/shared/auth": ["modules/shared/auth/src/index.ts"],
       "@deskly/shared/constants": ["modules/shared/constants/src/index.ts"],
       "@deskly/shared/navigation": ["modules/shared/navigation/src/index.ts"],
       "@deskly/shared/rxjs-operators": [

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,9 +20,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
+  readonly isAuthenticated = input(false);
+
   readonly menuClick = output();
+  readonly signOut = output();
 
   onMenuClick() {
     this.menuClick.emit();
+  }
+
+  onSignOutClick() {
+    this.signOut.emit();
   }
 }
