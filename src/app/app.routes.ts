@@ -33,6 +33,6 @@ export const APP_ROUTES: Routes = [
     path: Route.BOOKING,
     title: Title.BOOKING,
     canActivate: [authGuard],
-    loadComponent: async () => (await import('@deskly/booking')).BookingPageComponent
+    loadChildren: async () => (await import('@deskly/booking')).BOOKING_ROUTES
   }
 ];

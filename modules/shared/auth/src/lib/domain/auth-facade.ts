@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { signIn, signOut, signUp } from './auth.actions';
-import { isAuthenticated } from './auth.selectors';
+import { isAuthenticated, isManager } from './auth.selectors';
 import { SignUpRequest } from './auth.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
   readonly isAuthenticated = this.store.selectSignal(isAuthenticated);
+  readonly isManager = this.store.selectSignal(isManager);
 
   constructor(private readonly store: Store) {}
 

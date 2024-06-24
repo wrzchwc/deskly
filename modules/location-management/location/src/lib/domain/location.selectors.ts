@@ -25,8 +25,8 @@ export const selectLocationPreviews = createSelector(
   selectLocations,
   (locations) =>
     locations.map<LocationPreview>((location) => ({
-      id: location.id,
-      name: location.name,
+      id: location.id.id,
+      name: location.name.name,
       city: location.address.city
     }))
 );

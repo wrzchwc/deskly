@@ -11,7 +11,13 @@ export const RESOURCES_FEATURE_KEY = 'location-management/resources';
 
 export type ResourcesState = EntityState<Resource>;
 
-export const adapter: EntityAdapter<Resource> = createEntityAdapter<Resource>();
+function selectId(resource: Resource): string {
+  return resource.resourceId.id;
+}
+
+export const adapter: EntityAdapter<Resource> = createEntityAdapter<Resource>({
+  selectId
+});
 
 const initialState = adapter.getInitialState();
 

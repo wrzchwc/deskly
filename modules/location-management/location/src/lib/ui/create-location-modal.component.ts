@@ -35,6 +35,7 @@ export class CreateLocationModalComponent {
     name: this.formBuilder.nonNullable.control('', [Validators.required]),
     address: this.formBuilder.group({
       street: this.formBuilder.nonNullable.control('', [Validators.required]),
+      city: this.formBuilder.nonNullable.control('', [Validators.required]),
       streetNumber: this.formBuilder.control<number | null>(null, [
         Validators.required,
         Validators.min(1)
@@ -42,7 +43,6 @@ export class CreateLocationModalComponent {
       flatNumber: this.formBuilder.control<number | null>(null, [
         Validators.min(1)
       ]),
-      city: this.formBuilder.nonNullable.control('', [Validators.required]),
       zipCode: this.formBuilder.nonNullable.control('', [Validators.required])
     }),
     hours: this.formBuilder.group({

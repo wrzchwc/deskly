@@ -10,19 +10,19 @@ import { LocationFacade } from '../domain/location-facade';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { OpeningHoursPreviewComponent } from '../ui/opening-hours-preview.component';
-import { WeekDay as WeekDayLabel } from '@deskly/shared/constants';
-import { OpeningHours, WeekDay } from '../domain/location.model';
+// import { WeekDay as WeekDayLabel } from '@deskly/shared/constants';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import {
   ResourcesFacade,
   ResourcesPreviewComponent
 } from '@deskly/location-management/resources';
+// import { OpeningHours, WeekDay } from '@deskly/shared/location';
 
-interface OpeningHoursData {
-  readonly day: WeekDayLabel;
-  readonly hours: OpeningHours;
-}
+// interface OpeningHoursData {
+//   readonly day: WeekDayLabel;
+//   readonly hours: OpeningHours;
+// }
 
 @Component({
   selector: 'deskly-location-information-page',
@@ -45,16 +45,16 @@ export class LocationInformationPageComponent implements OnInit {
   readonly location = this.locationFacade.currentLocation;
   readonly isLoading = this.locationFacade.isLoadingInProgress;
   readonly address = computed(() => this.location()?.address);
-  readonly openingHoursData = computed<OpeningHoursData[]>(() => {
-    const location = this.location();
-    if (!location) {
-      return [];
-    }
-    return Object.values(WeekDayLabel).map((weekDayLabel) => ({
-      day: weekDayLabel,
-      hours: location.hours[weekDayLabel.toLowerCase() as WeekDay][0]
-    }));
-  });
+  // readonly openingHoursData = computed<OpeningHoursData[]>(() => {
+  //   const location = this.location();
+  //   if (!location) {
+  //     return [];
+  //   }
+  //   return Object.values(WeekDayLabel).map((weekDayLabel, index) => ({
+  //     day: weekDayLabel,
+  //     hours: location.hours[index][weekDayLabel.toLowerCase() as WeekDay]
+  //   }));
+  // });
   readonly hotDesks = this.locationFacade.currentLocationHotDesks;
   readonly conferenceRooms = this.locationFacade.currentLocationConferenceRooms;
   readonly audioVideoDevices =
@@ -82,7 +82,7 @@ export class LocationInformationPageComponent implements OnInit {
   removeLocation() {
     this.locationFacade.startDeletingLocation({
       id: this.locationId(),
-      name: this.location()?.name || ''
+      name: this.location()?.name.name || ''
     });
   }
 

@@ -1,11 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef, Inject,
+  DestroyRef,
+  Inject,
   OnInit
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef
+} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -83,14 +88,14 @@ export class AddResourcesModalComponent implements OnInit {
   );
 
   readonly formRecord: FormRecord = this.formBuilder.record({
+    type: this.formBuilder.nonNullable.control(this.INITIAL_TYPE),
+    name: this.formBuilder.nonNullable.control('', [Validators.required]),
+    photos: this.formBuilder.nonNullable.control(''),
     quantity: this.formBuilder.nonNullable.control(1, [
       Validators.required,
       Validators.min(1)
     ]),
-    type: this.formBuilder.nonNullable.control(this.INITIAL_TYPE),
-    name: this.formBuilder.nonNullable.control('', [Validators.required]),
     description: this.formBuilder.nonNullable.control(''),
-    photos: this.formBuilder.nonNullable.control(''),
     metadata: this.DESK_METADATA
   });
 

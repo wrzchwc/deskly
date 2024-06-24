@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OpeningHours } from '../domain/location.model';
 import { WeekDay } from '@deskly/shared/constants';
+import { OpeningHours } from '@deskly/shared/location';
 
 @Component({
   selector: 'deskly-opening-hours-preview',

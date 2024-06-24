@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  CreateLocationConfig,
-  CreateLocationRequest,
-  OpeningHours,
-  WeekDay
-} from './location.model';
+import { CreateLocationConfig, CreateLocationRequest } from './location.model';
 
 @Injectable()
 export class LocationApiTransformerService {
@@ -12,20 +7,15 @@ export class LocationApiTransformerService {
     return {
       name: value.name,
       address: value.address,
-      hours: this.transformOpeningHours(value.hours)
+      hours: [
+        { monday: [value.hours.monday] },
+        { tuesday: [value.hours.tuesday] },
+        { wednesday: [value.hours.wednesday] },
+        { thursday: [value.hours.thursday] },
+        { friday: [value.hours.friday] },
+        { saturday: [value.hours.saturday] },
+        { sunday: [value.hours.sunday] }
+      ]
     };
-  }
-
-  private transformOpeningHours(
-    openingHours: Record<WeekDay, OpeningHours>
-  ): Record<WeekDay, [OpeningHours]> {
-    const days = Object.keys(openingHours) as WeekDay[];
-    return days.reduce(
-      (acc, day) => ({
-        ...acc,
-        [day]: [openingHours[day]]
-      }),
-      {} as Record<WeekDay, [OpeningHours]>
-    );
   }
 }

@@ -20,6 +20,11 @@ export interface ResourceResponse {
   readonly quantity: number;
   readonly description: string;
   readonly metadata: Partial<Metadata>;
+  readonly resourceId: ResourceId;
+}
+
+export interface ResourceId {
+  readonly id: string;
 }
 
 export interface Resource extends ResourceResponse {

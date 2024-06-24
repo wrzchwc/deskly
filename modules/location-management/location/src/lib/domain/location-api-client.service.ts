@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { CreateLocationConfig, Location } from './location.model';
+import { map, Observable } from 'rxjs';
+import { CreateLocationConfig, CreateLocationResponse } from './location.model';
 import { LocationApiTransformerService } from './location-api-transformer.service';
 import { httpError } from '@deskly/shared/rxjs-operators';
+import { Location } from '@deskly/shared/location';
 
 @Injectable()
 export class LocationApiClientService {
@@ -19,14 +20,15 @@ export class LocationApiClientService {
   ): Observable<Location | undefined> {
     const request = this.locationApiTransformer.transform(config);
     return this.httpClient
-      .post<Location>(this.baseUrl, request)
-      .pipe(httpError());
-  }
-
-  fetchLocations(): Observable<Location[] | undefined> {
-    return this.httpClient
-      .get<Location[]>(`${this.baseUrl}s`)
-      .pipe(httpError());
+      .post<CreateLocationResponse>(this.baseUrl, request)
+      .pipe(
+        map(({ id }) => ({
+          ...request,
+          id: { id },
+          name: { name: request.name }
+        })),
+        httpError()
+      );
   }
 
   fetchLocation(locationId: string): Observable<Location | undefined> {

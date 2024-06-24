@@ -10,7 +10,7 @@ export function jwtInterceptor(
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> {
   const token = inject(Store).selectSignal(selectToken);
-  if (!token) {
+  if (!token()) {
     return next(request);
   }
   return next(

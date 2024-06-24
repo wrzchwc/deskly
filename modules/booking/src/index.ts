@@ -1,1 +1,1 @@
-export { BookingPageComponent } from './lib/feature/booking-page.component';
+export { BOOKING_ROUTES } from './booking.routes';

@@ -14,6 +14,7 @@ import { AuthFacade } from '@deskly/shared/auth';
 })
 export class AppComponent {
   readonly isAuthenticated = this.authFacade.isAuthenticated;
+  readonly isManager = this.authFacade.isManager;
 
   constructor(private readonly authFacade: AuthFacade) {}
 

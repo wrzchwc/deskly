@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-import { Location } from './location.model';
 import {
   addLocationSuccess,
   deleteLocationSuccess,
@@ -10,6 +9,7 @@ import {
   setLocations
 } from './location.actions';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Location } from '@deskly/shared/location';
 
 export const LOCATIONS_FEATURE_KEY = 'location-management/locations';
 
@@ -18,7 +18,13 @@ export interface LocationsState extends EntityState<Location> {
   readonly selectedLocationId: string | undefined;
 }
 
-export const adapter: EntityAdapter<Location> = createEntityAdapter<Location>();
+function selectId(location: Location): string {
+  return location.id.id;
+}
+
+export const adapter: EntityAdapter<Location> = createEntityAdapter<Location>({
+  selectId
+});
 
 const initialState = adapter.getInitialState({
   isLoading: false,

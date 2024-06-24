@@ -30,6 +30,7 @@ import { currentLocationId } from './location.selectors';
 import { navigateToPage } from '@deskly/shared/navigation';
 import { Route } from '@deskly/shared/navigation';
 import { selectUrl } from '@deskly/shared/navigation';
+import { LocationApiClientService as SharedLocationApiClientService } from '@deskly/shared/location';
 
 @Injectable()
 export class LocationEffects {
@@ -38,6 +39,7 @@ export class LocationEffects {
     private readonly matDialog: MatDialog,
     private readonly matSnackBar: MatSnackBar,
     private readonly locationApiClientService: LocationApiClientService,
+    private readonly sharedLocationApiClientService: SharedLocationApiClientService,
     private readonly store: Store
   ) {}
 
@@ -90,7 +92,7 @@ export class LocationEffects {
   readonly fetchLocations$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fetchLocations),
-      switchMap(() => this.locationApiClientService.fetchLocations()),
+      switchMap(() => this.sharedLocationApiClientService.fetchLocations()),
       filter(Boolean),
       map((locations) => setLocations({ locations }))
     )

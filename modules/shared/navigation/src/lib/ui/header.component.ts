@@ -28,6 +28,7 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
   readonly isAuthenticated = input(false);
+  readonly isManager = input(false);
 
   readonly menuClick = output();
   readonly signOut = output();

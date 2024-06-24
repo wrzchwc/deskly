@@ -12,12 +12,12 @@ import {
   signUpFailure,
   signUpSuccess
 } from './auth.actions';
-import { filter, map, switchMap, tap } from 'rxjs';
+import { catchError, filter, map, of, switchMap, tap } from 'rxjs';
 import { AuthApiService } from './auth-api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtService } from './jwt.service';
 import { navigateToPage, Route } from '@deskly/shared/navigation';
-import { UserRole } from './auth.model';
+import { Authority } from './auth.model';
 
 @Injectable()
 export class AuthEffects {
@@ -44,15 +44,15 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(decodeToken),
       switchMap(({ token }) =>
-        this.jwtService
-          .decodeToken(token)
-          .pipe(
-            map((payload) =>
-              payload
-                ? signInSuccess({ token, role: payload.role })
-                : signInFailure()
-            )
-          )
+        this.jwtService.decodeToken(token).pipe(
+          map((payload) => {
+            if (!payload) return signInFailure();
+            return signInSuccess({
+              token,
+              authorities: payload.auth.map(({ authority }) => authority)
+            });
+          })
+        )
       )
     )
   );
@@ -60,7 +60,7 @@ export class AuthEffects {
   readonly navigateOnManagerSignInSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signInSuccess),
-      filter(({ role }) => role === UserRole.MANAGER),
+      filter(({ authorities }) => authorities.includes(Authority.MANAGER)),
       map(() => navigateToPage({ route: Route.LOCATION_MANAGEMENT }))
     )
   );
@@ -68,7 +68,7 @@ export class AuthEffects {
   readonly navigateOnTenantSignInSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signInSuccess),
-      filter(({ role }) => role === UserRole.TENANT),
+      filter(({ authorities }) => authorities.includes(Authority.TENANT)),
       map(() => navigateToPage({ route: Route.BOOKING }))
     )
   );
@@ -88,7 +88,8 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(signOut),
       switchMap(() => this.authApiService.signOut()),
-      map((response) => (response ? signOutSuccess() : signOutFailure()))
+      map(() => signOutSuccess()),
+      catchError(() => of(signOutFailure()))
     )
   );
 
