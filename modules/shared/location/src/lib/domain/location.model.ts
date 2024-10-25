@@ -2,7 +2,7 @@ export interface Location {
   readonly id: LocationId;
   readonly name: LocationName;
   readonly address: Address;
-  readonly hours: OpeningHoursWeek;
+  readonly openingHours: OpeningHours;
 }
 
 interface LocationId {
@@ -21,26 +21,21 @@ export interface Address {
   readonly zipCode: string;
 }
 
-export type WeekDay =
-  | 'monday'
-  | 'tuesday'
-  | 'wednesday'
-  | 'thursday'
-  | 'friday'
-  | 'saturday'
-  | 'sunday';
-
-export interface OpeningHours {
-  readonly start: string;
-  readonly finish: string;
+interface OpeningHours {
+  readonly week: Week;
 }
 
-export type OpeningHoursWeek = [
-  { readonly monday: OpeningHours[] },
-  { readonly tuesday: OpeningHours[] },
-  { readonly wednesday: OpeningHours[] },
-  { readonly thursday: OpeningHours[] },
-  { readonly friday: OpeningHours[] },
-  { readonly saturday: OpeningHours[] },
-  { readonly sunday: OpeningHours[] }
-];
+interface Week {
+  readonly Monday: WorkDay[];
+  readonly Tuesday: WorkDay[];
+  readonly Wednesday: WorkDay[];
+  readonly Thursday: WorkDay[];
+  readonly Friday: WorkDay[];
+  readonly Saturday: WorkDay[];
+  readonly Sunday: WorkDay[];
+}
+
+export interface WorkDay {
+  readonly from: string;
+  readonly to: string;
+}

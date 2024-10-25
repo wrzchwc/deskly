@@ -1,32 +1,32 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { CreateLocationConfig, CreateLocationResponse } from './location.model';
-import { LocationApiTransformerService } from './location-api-transformer.service';
 import { httpError } from '@deskly/shared/rxjs-operators';
 import { Location } from '@deskly/shared/location';
+import { LocationApiTransformerService } from './location-api-transformer.service';
 
 @Injectable()
 export class LocationApiClientService {
-  private readonly baseUrl = '/api/location';
+  private readonly httpClient = inject(HttpClient);
+  private readonly locationApiTransformer = inject(
+    LocationApiTransformerService
+  );
 
-  constructor(
-    private readonly httpClient: HttpClient,
-    private readonly locationApiTransformer: LocationApiTransformerService
-  ) {}
+  private readonly baseUrl = '/api/location';
 
   createLocation(
     config: CreateLocationConfig
   ): Observable<Location | undefined> {
-    const request = this.locationApiTransformer.transform(config);
     return this.httpClient
-      .post<CreateLocationResponse>(this.baseUrl, request)
+      .post<CreateLocationResponse>(
+        this.baseUrl,
+        this.locationApiTransformer.transformConfigToRequest(config)
+      )
       .pipe(
-        map(({ id }) => ({
-          ...request,
-          id: { id },
-          name: { name: request.name }
-        })),
+        map(({ id }) =>
+          this.locationApiTransformer.transformResponseToLocation(id, config)
+        ),
         httpError()
       );
   }

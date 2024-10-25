@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   OnInit
 } from '@angular/core';
@@ -10,19 +11,19 @@ import { LocationFacade } from '../domain/location-facade';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { OpeningHoursPreviewComponent } from '../ui/opening-hours-preview.component';
-// import { WeekDay as WeekDayLabel } from '@deskly/shared/constants';
+import { WeekDay } from '@deskly/shared/constants';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import {
   ResourcesFacade,
   ResourcesPreviewComponent
 } from '@deskly/location-management/resources';
-// import { OpeningHours, WeekDay } from '@deskly/shared/location';
+import { WorkDay } from '@deskly/shared/location';
 
-// interface OpeningHoursData {
-//   readonly day: WeekDayLabel;
-//   readonly hours: OpeningHours;
-// }
+interface OpeningHoursData {
+  readonly day: WeekDay;
+  readonly hours: WorkDay | undefined;
+}
 
 @Component({
   selector: 'deskly-location-information-page',
@@ -41,31 +42,30 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocationInformationPageComponent implements OnInit {
+  private readonly locationFacade = inject(LocationFacade);
+  private readonly resourcesFacade = inject(ResourcesFacade);
+
   readonly locationId = input('');
+
   readonly location = this.locationFacade.currentLocation;
   readonly isLoading = this.locationFacade.isLoadingInProgress;
   readonly address = computed(() => this.location()?.address);
-  // readonly openingHoursData = computed<OpeningHoursData[]>(() => {
-  //   const location = this.location();
-  //   if (!location) {
-  //     return [];
-  //   }
-  //   return Object.values(WeekDayLabel).map((weekDayLabel, index) => ({
-  //     day: weekDayLabel,
-  //     hours: location.hours[index][weekDayLabel.toLowerCase() as WeekDay]
-  //   }));
-  // });
+  readonly openingHoursData = computed<OpeningHoursData[]>(() => {
+    const location = this.location();
+    if (!location) {
+      return [];
+    }
+    return Object.values(WeekDay).map((day) => ({
+      day,
+      hours: location.openingHours.week[day].at(0)
+    }));
+  });
   readonly hotDesks = this.locationFacade.currentLocationHotDesks;
   readonly conferenceRooms = this.locationFacade.currentLocationConferenceRooms;
   readonly audioVideoDevices =
     this.locationFacade.currentLocationAudioVideoDevices;
   readonly privateDesks = this.locationFacade.currentLocationPrivateDesks;
   readonly privateRooms = this.locationFacade.currentLocationPrivateRooms;
-
-  constructor(
-    private readonly locationFacade: LocationFacade,
-    private readonly resourcesFacade: ResourcesFacade
-  ) {}
 
   ngOnInit(): void {
     this.locationFacade.fetchLocation(this.locationId());

@@ -1,7 +1,12 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WeekDay } from '@deskly/shared/constants';
-import { OpeningHours } from '@deskly/shared/location';
+import { WorkDay } from '@deskly/shared/location';
 
 @Component({
   selector: 'deskly-opening-hours-preview',
@@ -13,8 +18,11 @@ import { OpeningHours } from '@deskly/shared/location';
 })
 export class OpeningHoursPreviewComponent {
   readonly day = input<WeekDay>(WeekDay.MONDAY);
-  readonly openingHours = input<OpeningHours>({
-    start: '00:00',
-    finish: '23:59'
+  readonly openingHours = input<WorkDay | undefined>({
+    from: '00:00',
+    to: '23:59'
   });
+
+  readonly from = computed(() => this.openingHours()?.from || '00:00');
+  readonly to = computed(() => this.openingHours()?.to || '23:59');
 }

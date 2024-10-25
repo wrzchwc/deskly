@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   selectCurrentLocation,
@@ -19,12 +19,14 @@ import {
   selectPrivateDesks,
   selectPrivateRooms
 } from '@deskly/location-management/resources';
+import { Location } from '@deskly/shared/location';
 
 @Injectable()
 export class LocationFacade {
   readonly previews = this.store.selectSignal(selectLocationPreviews);
   readonly isLoadingInProgress = this.store.selectSignal(isLoadingLocations);
-  readonly currentLocation = this.store.selectSignal(selectCurrentLocation);
+  readonly currentLocation: Signal<Location | undefined> =
+    this.store.selectSignal(selectCurrentLocation);
   readonly currentLocationHotDesks = this.store.selectSignal(
     selectHotDesksForCurrentLocation
   );

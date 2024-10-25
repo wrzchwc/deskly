@@ -31,7 +31,7 @@ export class AuthApiService {
 
   signUp(request: SignUpRequest) {
     return this.httpClient
-      .post<SignUpResponse>(`${this.baseUrl}/users`, request)
+      .post<SignUpResponse>(`${this.baseUrl}/registration`, request)
       .pipe(httpError());
   }
 }
