@@ -1,11 +1,21 @@
 <section class="home-page__main-container">
   <h1 class="header">Welcome to deskly!</h1>
   <div class="buttons-container">
-    <button mat-flat-button color="primary" routerLink="/sign-in">
+    <a
+      mat-flat-button
+      color="primary"
+      href="https://deskly-pwr.auth.us-east-1.amazoncognito.com/login?client_id=3l4e98v8vcg266c660eqvrag5m&response_type=token&scope=email+openid&redirect_uri=http%3A%2F%2Flocalhost%3A3000"
+      target="_self"
+    >
       Sign in
-    </button>
-    <button mat-flat-button color="accent" routerLink="/sign-up">
+    </a>
+    <a
+      mat-flat-button
+      color="accent"
+      href="https://deskly-pwr.auth.us-east-1.amazoncognito.com/signup?client_id=3l4e98v8vcg266c660eqvrag5m&response_type=token&scope=email+openid&redirect_uri=http%3A%2F%2Flocalhost%3A3000"
+      target="_self"
+    >
       Sign up
-    </button>
+    </a>
   </div>
 </section>
