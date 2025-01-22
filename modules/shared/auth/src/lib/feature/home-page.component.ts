@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthUrlGenerator } from '../data/auth-url-generator.service';
 
 @Component({
   selector: 'deskly-home-page',
@@ -10,4 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomePageComponent {}
+export class HomePageComponent {
+  private readonly urlGenerator = inject(AuthUrlGenerator);
+
+  readonly signInUrl = this.urlGenerator.signInUrl;
+  readonly signUpUrl = this.urlGenerator.signUpUrl;
+}

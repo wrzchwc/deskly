@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectToken } from './auth.selectors';
-import { AUTH_HEADER } from './auth.model';
+import { AUTH_HEADER } from '../domain/auth.model';
 
 export function jwtInterceptor(
   request: HttpRequest<unknown>,

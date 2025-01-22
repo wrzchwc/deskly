@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { TokenPayload } from './auth.model';
+import { TokenPayload } from '../domain/auth.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({

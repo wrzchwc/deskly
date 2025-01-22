@@ -1,12 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { SignUpRequest, Authority } from './auth.model';
+import { Authority } from '../domain/auth.model';
 
 const prefix = '[Auth]';
-
-export const signIn = createAction(
-  `${prefix} Sign in`,
-  props<{ readonly email: string; readonly password: string }>()
-);
 
 export const decodeToken = createAction(
   `${prefix} Decode token`,
@@ -25,12 +20,3 @@ export const signOut = createAction(`${prefix} Sign out`);
 export const signOutSuccess = createAction(`${prefix} Sign out success`);
 
 export const signOutFailure = createAction(`${prefix} Sign out failure`);
-
-export const signUp = createAction(
-  `${prefix} Sign up`,
-  props<{ readonly request: SignUpRequest }>()
-);
-
-export const signUpSuccess = createAction(`${prefix} Sign up success`);
-
-export const signUpFailure = createAction(`${prefix} Sign up failure`);

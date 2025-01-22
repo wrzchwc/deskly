@@ -1,4 +1,4 @@
-import { Authority } from './auth.model';
+import { Authority } from '../domain/auth.model';
 import { createReducer, on } from '@ngrx/store';
 import { signInSuccess, signOutSuccess } from './auth.actions';
 

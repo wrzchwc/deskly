@@ -17,18 +17,3 @@ export enum Authority {
 }
 
 export const AUTH_HEADER = 'Authorization';
-
-export interface SignUpRequest {
-  readonly email: string;
-  readonly name: string;
-  readonly surname: string;
-  readonly password: string;
-  readonly userType: Authority;
-}
-
-export interface SignUpResponse {
-  readonly userId: number;
-  readonly name: string;
-  readonly surname: string;
-  readonly email: string;
-}
