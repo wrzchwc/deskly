@@ -1,6 +1,6 @@
 <form class="create-location-form__form" [formGroup]="formGroup">
   <div class="form-row">
-    <mat-form-field style="width: 100%">
+    <mat-form-field class="full-width">
       <mat-label>Location name</mat-label>
       <input
         type="text"
@@ -10,12 +10,29 @@
       />
     </mat-form-field>
   </div>
+  <h2 class="form-section-label">Contact</h2>
+  <div class="form-row">
+    <mat-form-field class="full-width">
+      <mat-label>E-mail</mat-label>
+      <input
+        type="email"
+        matInput
+        placeholder="Enter e-mail address"
+        formControlName="email"
+      />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Phone number</mat-label>
+      <input
+        type="tel"
+        matInput
+        placeholder="Enter phone number"
+        formControlName="phoneNumber"
+      />
+    </mat-form-field>
+  </div>
   <h2 class="form-section-label">Address</h2>
-  <div
-    class="form-row"
-    id="street-row"
-    [formGroup]="formGroup.controls.address"
-  >
+  <div class="form-row" id="street-row">
     <mat-form-field id="street">
       <mat-label>Street</mat-label>
       <input
@@ -31,7 +48,7 @@
         type="number"
         matInput
         placeholder="Enter street number"
-        formControlName="streetNumber"
+        formControlName="buildingName"
       />
     </mat-form-field>
     <mat-form-field>
@@ -44,7 +61,7 @@
       />
     </mat-form-field>
   </div>
-  <div class="form-row" [formGroup]="formGroup.controls.address" id="city-row">
+  <div class="form-row" id="city-row">
     <mat-form-field id="city">
       <mat-label>City</mat-label>
       <input
@@ -60,19 +77,9 @@
         type="text"
         matInput
         placeholder="Enter zip code"
-        formControlName="zipCode"
+        formControlName="postalCode"
       />
     </mat-form-field>
-  </div>
-  <h2 class="form-section-label">Opening hours</h2>
-  <div class="form-row">
-    @for (control of openingHoursFormGroups; track control; let index = $index)
-    {
-    <deskly-opening-hours-input
-      [formGroup]="control"
-      [day]="days[index]"
-    ></deskly-opening-hours-input>
-    }
   </div>
   <mat-dialog-actions>
     <button

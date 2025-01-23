@@ -8,7 +8,7 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { WeekDay } from '@deskly/shared/constants';
+import { WeekDay } from '../domain/week-day';
 
 export type OpeningHoursFormGroup = FormGroup<{
   readonly start: FormControl<string>;

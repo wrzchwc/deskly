@@ -55,20 +55,18 @@ export class LocationEffects {
         })
       ),
       modalResult(),
-      map((config) => addLocation({ config }))
+      map((request) => addLocation({ request }))
     )
   );
 
   readonly addLocation$ = createEffect(() =>
     this.actions$.pipe(
       ofType(addLocation),
-      switchMap(({ config }) =>
-        this.locationApiClientService.createLocation(config)
+      switchMap(({ request }) =>
+        this.locationApiClientService.createLocation(request)
       ),
       map((response) =>
-        response
-          ? addLocationSuccess({ location: response })
-          : addLocationFailure()
+        response ? addLocationSuccess() : addLocationFailure()
       )
     )
   );
@@ -77,7 +75,12 @@ export class LocationEffects {
     () =>
       this.actions$.pipe(
         ofType(addLocationSuccess),
-        tap(() => this.matSnackBar.open('Location added successfully!', 'OK'))
+        tap(() =>
+          this.matSnackBar.open(
+            'Location added successfully! Please refresh.',
+            'OK'
+          )
+        )
       ),
     { dispatch: false }
   );

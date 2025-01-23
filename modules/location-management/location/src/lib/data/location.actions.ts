@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateLocationConfig } from '../domain/location.model';
 import { DeleteLocationModalData } from '../ui/delete-location-modal.component';
 import { Location } from '../domain/location';
+import { CreateLocationRequest } from '../domain/create-location';
 
 const prefix = '[Location Management/Locations]';
 
@@ -11,12 +11,11 @@ export const startAddingLocation = createAction(
 
 export const addLocation = createAction(
   `${prefix} Add location`,
-  props<{ readonly config: CreateLocationConfig }>()
+  props<{ readonly request: CreateLocationRequest }>()
 );
 
 export const addLocationSuccess = createAction(
-  `${prefix} Add location success`,
-  props<{ readonly location: Location }>()
+  `${prefix} Add location success`
 );
 
 export const addLocationFailure = createAction(

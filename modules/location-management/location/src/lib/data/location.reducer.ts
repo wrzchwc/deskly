@@ -1,6 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
 import {
-  addLocationSuccess,
   deleteLocationSuccess,
   fetchLocation,
   fetchLocationFailure,
@@ -26,9 +25,6 @@ const initialState = adapter.getInitialState({
 
 export const locationsReducer = createReducer(
   initialState,
-  on(addLocationSuccess, (state, { location }) =>
-    adapter.addOne(location, state)
-  ),
   on(setLocations, (state, { locations }) => ({
     ...adapter.upsertMany(locations, state),
     isLoading: false

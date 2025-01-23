@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateLocationModalComponent } from '../ui/create-location-modal.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -15,7 +14,6 @@ import { ResourcesFacade } from '@deskly/location-management/resources';
   standalone: true,
   imports: [
     CommonModule,
-    CreateLocationModalComponent,
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,

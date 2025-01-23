@@ -1,22 +1,16 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
-import {
-  CreateLocationConfig,
-  CreateLocationResponse
-} from '../domain/location.model';
+import { Observable } from 'rxjs';
+import { CreateLocationResponse } from '../domain/location.model';
 import { httpError } from '@deskly/shared/rxjs-operators';
-import { LocationApiTransformerService } from './location-api-transformer.service';
 import { ENVIRONMENT } from '@deskly/environments';
 import { Location } from '../domain/location';
 import { ResourceDAO } from '@deskly/location-management/resources';
+import { CreateLocationRequest } from '../domain/create-location';
 
 @Injectable()
 export class LocationApiClientService {
   private readonly httpClient = inject(HttpClient);
-  private readonly locationApiTransformer = inject(
-    LocationApiTransformerService
-  );
   private readonly environment = inject(ENVIRONMENT);
 
   private readonly baseUrl = `${this.environment.apiUrl}/api/v1/deskly-location/location`;
@@ -28,20 +22,11 @@ export class LocationApiClientService {
   }
 
   createLocation(
-    config: CreateLocationConfig
-  ): Observable<Location | undefined> {
-    // @ts-expect-error fix this!
+    request: CreateLocationRequest
+  ): Observable<CreateLocationResponse | undefined> {
     return this.httpClient
-      .post<CreateLocationResponse>(
-        this.baseUrl,
-        this.locationApiTransformer.transformConfigToRequest(config)
-      )
-      .pipe(
-        map(({ id }) =>
-          this.locationApiTransformer.transformResponseToLocation(id, config)
-        ),
-        httpError()
-      );
+      .post<CreateLocationResponse>(this.baseUrl, request)
+      .pipe(httpError());
   }
 
   fetchLocation(locationId: string): Observable<Location | undefined> {

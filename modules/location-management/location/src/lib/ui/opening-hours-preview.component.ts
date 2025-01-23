@@ -5,8 +5,8 @@ import {
   input
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WeekDay } from '@deskly/shared/constants';
 import { WorkDay } from '@deskly/shared/location';
+import { WeekDay } from '../domain/week-day';
 
 @Component({
   selector: 'deskly-opening-hours-preview',
