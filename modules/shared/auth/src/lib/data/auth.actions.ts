@@ -19,6 +19,7 @@ export const decodeTokenSuccess = createAction(
     readonly identityToken: string;
     readonly accessToken: string;
     readonly groups: UserGroup[];
+    readonly email: string;
   }>()
 );
 

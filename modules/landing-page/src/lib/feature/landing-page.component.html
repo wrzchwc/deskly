@@ -1,1 +1,4 @@
-<p>landing-page works!</p>
+<article class="deskly-landing-page__main-container">
+  <h1 class="text greeting"><span class="welcome">Welcome back,</span> {{email()}}</h1>
+  <h2 class="text date">{{date$ | async | date: 'EEEE, dd MMMM yyyy, hh:mm a'}}</h2>
+</article>

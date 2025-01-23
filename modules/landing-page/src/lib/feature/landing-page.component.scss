@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.deskly-landing-page__main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  .text {
+    margin: 0;
+
+    .welcome {
+      color: #3f51b5;
+    }
+
+    &.greeting {
+      font-size: 2.5rem;
+    }
+
+    &.date {
+      font-size: 1.125rem;
+    }
+  }
+}

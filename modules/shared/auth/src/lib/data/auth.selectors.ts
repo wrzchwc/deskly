@@ -12,3 +12,5 @@ export const identityToken = createSelector(
   selectFeature,
   (state) => state.identityToken
 );
+
+export const email = createSelector(selectFeature, (state) => state.email);

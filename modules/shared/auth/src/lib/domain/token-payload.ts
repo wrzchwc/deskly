@@ -1,4 +1,5 @@
 export interface TokenPayload {
+  readonly email: string;
   readonly 'cognito:groups'?: UserGroup[];
 }
 

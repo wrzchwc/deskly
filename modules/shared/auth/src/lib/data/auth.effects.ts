@@ -44,7 +44,8 @@ export class AuthEffects {
           map((payload) =>
             decodeTokenSuccess({
               ...action,
-              groups: (payload['cognito:groups'] || []) as UserGroup[]
+              groups: (payload['cognito:groups'] || []) as UserGroup[],
+              email: payload.email
             })
           )
         )
