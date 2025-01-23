@@ -15,7 +15,8 @@ import {
 } from './location.actions';
 import { DeleteLocationModalData } from '../ui/delete-location-modal.component';
 import {
-  selectAudioVideoDevices,
+  fetchResourcesAssignedToCurrentLocation,
+  selectDevices,
   selectPrivateDesks,
   selectPrivateRooms
 } from '@deskly/location-management/resources';
@@ -33,9 +34,8 @@ export class LocationFacade {
   readonly currentLocationConferenceRooms = this.store.selectSignal(
     selectConferenceRoomsForCurrentLocation
   );
-  readonly currentLocationAudioVideoDevices = this.store.selectSignal(
-    selectAudioVideoDevices
-  );
+  readonly currentLocationAudioVideoDevices =
+    this.store.selectSignal(selectDevices);
   readonly currentLocationPrivateDesks =
     this.store.selectSignal(selectPrivateDesks);
   readonly currentLocationPrivateRooms =
@@ -57,5 +57,9 @@ export class LocationFacade {
 
   startDeletingLocation(data: DeleteLocationModalData): void {
     this.store.dispatch(startDeletingLocation({ data }));
+  }
+
+  fetchResourcesAssignedToCurrentLocation(): void {
+    this.store.dispatch(fetchResourcesAssignedToCurrentLocation());
   }
 }

@@ -1,5 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateResourceConfig, ResourceResponse } from './resources.model';
+import {
+  CreateResourceConfig,
+  ResourceResponse
+} from '../domain/resources.model';
+import { ResourceDAO } from '../domain/resource';
 
 const prefix = '[Location Management/Resources]';
 
@@ -22,23 +26,6 @@ export const addResourceFailure = createAction(
   `${prefix} Add resource failure`
 );
 
-export const fetchResources = createAction(
-  `${prefix} Fetch resources`,
-  props<{ readonly locationId: string }>()
-);
-
-export const fetchResourcesSuccess = createAction(
-  `${prefix} Fetch resources success`,
-  props<{
-    readonly resources: ResourceResponse[];
-    readonly locationId: string;
-  }>()
-);
-
-export const fetchResourcesFailure = createAction(
-  `${prefix} Fetch resources failure`
-);
-
 export const removeResource = createAction(
   `${prefix} Remove resource`,
   props<{ readonly locationId: string; readonly resourceId: string }>()
@@ -51,4 +38,13 @@ export const removeResourceSuccess = createAction(
 
 export const removeResourceFailure = createAction(
   `${prefix} Remove resource failure`
+);
+
+export const fetchResourcesAssignedToCurrentLocation = createAction(
+  `${prefix} Fetch resources assigned to location`
+);
+
+export const fetchResourcesAssignedToCurrentLocationSuccess = createAction(
+  `${prefix} Fetch resources assigned to location success`,
+  props<{ readonly locationId: string; readonly resources: ResourceDAO[] }>()
 );

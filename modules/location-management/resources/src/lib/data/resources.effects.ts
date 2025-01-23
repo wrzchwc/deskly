@@ -4,9 +4,6 @@ import {
   addResource,
   addResourceFailure,
   addResourceSuccess,
-  fetchResources,
-  fetchResourcesFailure,
-  fetchResourcesSuccess,
   removeResource,
   removeResourceFailure,
   removeResourceSuccess,
@@ -15,7 +12,7 @@ import {
 import { map, switchMap, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddResourcesModalComponent } from '../ui/add-resources-modal.component';
-import { CreateResourceConfig } from './resources.model';
+import { CreateResourceConfig } from '../domain/resources.model';
 import { modalResult } from '@deskly/shared/rxjs-operators';
 import { ResourceApiClientService } from './resource-api-client.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -82,23 +79,6 @@ export class ResourcesEffects {
         tap(() => this.matSnackBar.open('Resource adding failure!', 'OK'))
       ),
     { dispatch: false }
-  );
-
-  readonly fetchResources$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fetchResources),
-      switchMap(({ locationId }) =>
-        this.resourceApiClientService
-          .fetchResources(locationId)
-          .pipe(
-            map((response) =>
-              response
-                ? fetchResourcesSuccess({ resources: response, locationId })
-                : fetchResourcesFailure()
-            )
-          )
-      )
-    )
   );
 
   readonly removeResource$ = createEffect(() =>

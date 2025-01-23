@@ -8,9 +8,9 @@ import {
 import { CommonModule } from '@angular/common';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
-import { Resource, MetadataKey } from '../domain/resources.model';
 import { MatTableModule } from '@angular/material/table';
 import { ResourcesTableComponent } from './resources-table.component';
+import { AttributeName, Resource } from '../domain/resource';
 
 @Component({
   selector: 'deskly-resources-preview',
@@ -28,21 +28,24 @@ import { ResourcesTableComponent } from './resources-table.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResourcesPreviewComponent {
-  readonly hotDesks = input<Resource[]>([]);
+  readonly desks = input<Resource[]>([]);
   readonly conferenceRooms = input<Resource[]>([]);
   readonly audioVideoDevices = input<Resource[]>([]);
-  readonly privateDesks = input<Resource[]>([]);
   readonly privateRooms = input<Resource[]>([]);
 
   readonly openPreview = output<void>();
   readonly removeResource = output<string>();
 
-  readonly desksMetadata: MetadataKey[] = ['manufacturer', 'model'];
-  readonly roomsMetadata: MetadataKey[] = ['capacity'];
-  readonly audioVideoDevicesMetadata: MetadataKey[] = [
-    'manufacturer',
-    'model',
-    'serialNumber'
+  readonly desksMetadata: AttributeName[] = [
+    'producer',
+    'serial number',
+    'width',
+    'depth'
+  ];
+  readonly roomsMetadata: AttributeName[] = [];
+  readonly audioVideoDevicesMetadata: AttributeName[] = [
+    'producer',
+    'serial number'
   ];
 
   onOpen() {

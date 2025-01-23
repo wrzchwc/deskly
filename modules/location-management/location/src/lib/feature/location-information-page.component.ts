@@ -1,13 +1,14 @@
 import {
   ChangeDetectionStrategy,
-  Component, computed,
+  Component,
+  computed,
   inject,
   input,
   OnInit,
   Signal
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LocationFacade } from '../data/location-facade';
+import { LocationFacade } from '../data/location-facade.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { OpeningHoursPreviewComponent } from '../ui/opening-hours-preview.component';
@@ -63,7 +64,7 @@ export class LocationInformationPageComponent implements OnInit {
   }
 
   fetchResources() {
-    this.resourcesFacade.fetchResources(this.locationId());
+    this.locationFacade.fetchResourcesAssignedToCurrentLocation();
   }
 
   addResource() {

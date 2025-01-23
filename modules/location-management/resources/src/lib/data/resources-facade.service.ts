@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  fetchResources,
-  removeResource,
-  startAddingResources
-} from './resources.actions';
+import { removeResource, startAddingResources } from './resources.actions';
 
 @Injectable()
 export class ResourcesFacade {
@@ -12,10 +8,6 @@ export class ResourcesFacade {
 
   startAddingResources(locationId: string): void {
     this.store.dispatch(startAddingResources({ locationId }));
-  }
-
-  fetchResources(locationId: string) {
-    this.store.dispatch(fetchResources({ locationId }));
   }
 
   removeResource(resourceId: string, locationId: string): void {

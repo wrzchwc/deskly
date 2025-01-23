@@ -9,6 +9,7 @@ import { httpError } from '@deskly/shared/rxjs-operators';
 import { LocationApiTransformerService } from './location-api-transformer.service';
 import { ENVIRONMENT } from '@deskly/environments';
 import { Location } from '../domain/location';
+import { ResourceDAO } from '@deskly/location-management/resources';
 
 @Injectable()
 export class LocationApiClientService {
@@ -21,7 +22,9 @@ export class LocationApiClientService {
   private readonly baseUrl = `${this.environment.apiUrl}/api/v1/deskly-location/location`;
 
   fetchLocations(): Observable<Location[] | undefined> {
-    return this.httpClient.get<Location[]>(`${this.baseUrl}s`).pipe(httpError());
+    return this.httpClient
+      .get<Location[]>(`${this.baseUrl}s`)
+      .pipe(httpError());
   }
 
   createLocation(
@@ -44,6 +47,14 @@ export class LocationApiClientService {
   fetchLocation(locationId: string): Observable<Location | undefined> {
     return this.httpClient
       .get<Location>(`${this.baseUrl}/${locationId}`)
+      .pipe(httpError());
+  }
+
+  fetchResourcesAssignedToLocation(
+    locationId: string
+  ): Observable<ResourceDAO[] | undefined> {
+    return this.httpClient
+      .get<ResourceDAO[]>(`${this.baseUrl}/${locationId}/resource`)
       .pipe(httpError());
   }
 

@@ -4,7 +4,7 @@ import {
   RESOURCES_FEATURE_KEY,
   ResourcesState
 } from './resources.reducer';
-import { Resource, ResourceType } from './resources.model';
+import { ResourceType, Resource } from '../domain/resource';
 
 const selectFeature = createFeatureSelector<ResourcesState>(
   RESOURCES_FEATURE_KEY
@@ -20,16 +20,15 @@ export const selectConferenceRooms = createSelector(
 );
 
 export const selectHotDesks = createSelector(selectResources, (resources) =>
-  filterByType(resources, ResourceType.HOT_DESK)
+  filterByType(resources, ResourceType.DESK)
 );
 
-export const selectAudioVideoDevices = createSelector(
-  selectResources,
-  (resources) => filterByType(resources, ResourceType.AUDIO_VIDEO_DEVICE)
+export const selectDevices = createSelector(selectResources, (resources) =>
+  filterByType(resources, ResourceType.DEVICE)
 );
 
 export const selectPrivateDesks = createSelector(selectResources, (resources) =>
-  filterByType(resources, ResourceType.PRIVATE_DESK)
+  filterByType(resources, ResourceType.DESK)
 );
 
 export const selectPrivateRooms = createSelector(selectResources, (resources) =>

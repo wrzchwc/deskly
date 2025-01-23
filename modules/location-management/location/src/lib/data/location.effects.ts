@@ -30,6 +30,10 @@ import { currentLocationId } from './location.selectors';
 import { navigateToPage } from '@deskly/shared/navigation';
 import { Route } from '@deskly/shared/navigation';
 import { selectUrl } from '@deskly/shared/navigation';
+import {
+  fetchResourcesAssignedToCurrentLocation,
+  fetchResourcesAssignedToCurrentLocationSuccess
+} from '@deskly/location-management/resources';
 
 @Injectable()
 export class LocationEffects {
@@ -109,6 +113,28 @@ export class LocationEffects {
         response
           ? fetchLocationSuccess({ location: response })
           : fetchLocationFailure()
+      )
+    )
+  );
+
+  readonly fetchResourcesAssignedToCurrentLocation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fetchResourcesAssignedToCurrentLocation),
+      withLatestFrom(this.store.select(currentLocationId)),
+      map(([, locationId]) => locationId),
+      filter(Boolean),
+      switchMap((locationId) =>
+        this.locationApiClientService
+          .fetchResourcesAssignedToLocation(locationId)
+          .pipe(
+            filter(Boolean),
+            map((resources) =>
+              fetchResourcesAssignedToCurrentLocationSuccess({
+                locationId,
+                resources
+              })
+            )
+          )
       )
     )
   );

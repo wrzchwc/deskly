@@ -17,7 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {
   CreateResourceConfig,
   CreateResourceRequest,
-  ResourceType
+  ResourceTypeOld
 } from '../domain/resources.model';
 import { MatInputModule } from '@angular/material/input';
 import {
@@ -30,12 +30,12 @@ import {
 } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ResourceTypeService } from '../domain/resource-type.service';
+import { ResourceTypeService } from '../data/resource-type.service';
 import { MatOptionModule } from '@angular/material/core';
 
 interface SelectOption {
   readonly label: string;
-  readonly value: ResourceType;
+  readonly value: ResourceTypeOld;
 }
 
 @Component({
@@ -57,7 +57,7 @@ interface SelectOption {
   providers: [ResourceTypeService]
 })
 export class AddResourcesModalComponent implements OnInit {
-  private readonly INITIAL_TYPE = ResourceType.HOT_DESK;
+  private readonly INITIAL_TYPE = ResourceTypeOld.HOT_DESK;
 
   private readonly DESK_METADATA = this.formBuilder.group({
     manufacturer: this.formBuilder.nonNullable.control('', [
@@ -83,7 +83,7 @@ export class AddResourcesModalComponent implements OnInit {
     ])
   });
 
-  readonly options: SelectOption[] = Object.values(ResourceType).map(
+  readonly options: SelectOption[] = Object.values(ResourceTypeOld).map(
     (type) => ({ value: type, label: type.replaceAll('_', ' ') })
   );
 
@@ -125,7 +125,7 @@ export class AddResourcesModalComponent implements OnInit {
   }
 
   private readonly type$ = (
-    this.formRecord.controls['type'] as FormControl<ResourceType>
+    this.formRecord.controls['type'] as FormControl<ResourceTypeOld>
   ).valueChanges.pipe(startWith(this.INITIAL_TYPE));
 
   readonly isResourceTypeRoom$: Observable<boolean> = this.type$.pipe(

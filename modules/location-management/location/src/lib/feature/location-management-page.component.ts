@@ -4,7 +4,7 @@ import { CreateLocationModalComponent } from '../ui/create-location-modal.compon
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { LocationFacade } from '../data/location-facade';
+import { LocationFacade } from '../data/location-facade.service';
 import { LocationsTableComponent } from '../ui/locations-table.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeleteLocationModalData } from '../ui/delete-location-modal.component';

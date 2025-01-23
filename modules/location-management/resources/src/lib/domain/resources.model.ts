@@ -4,7 +4,7 @@ export interface CreateResourceConfig {
 }
 
 export interface CreateResourceRequest {
-  readonly type: ResourceType;
+  readonly type: ResourceTypeOld;
   readonly name: string;
   readonly photos: string[];
   readonly quantity: number; // number of serialNumbers must match this value
@@ -14,7 +14,7 @@ export interface CreateResourceRequest {
 
 export interface ResourceResponse {
   readonly id: string;
-  readonly type: ResourceType;
+  readonly type: ResourceTypeOld;
   readonly name: string;
   readonly photos: string[];
   readonly quantity: number;
@@ -27,15 +27,13 @@ export interface ResourceId {
   readonly id: string;
 }
 
-export interface Resource extends ResourceResponse {
+export interface ResourceOld extends ResourceResponse {
   readonly locationId: string;
 }
 
-export type ResourceKey = Exclude<keyof Resource, 'metadata'>;
+export type ResourceKey = Exclude<keyof ResourceOld, 'metadata'>;
 
-export type MetadataKey = keyof Metadata;
-
-export enum ResourceType {
+export enum ResourceTypeOld {
   HOT_DESK = 'HOT_DESK',
   AUDIO_VIDEO_DEVICE = 'AUDIO_VIDEO_DEVICE',
   PRIVATE_DESK = 'PRIVATE_DESK',

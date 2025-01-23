@@ -5,37 +5,28 @@
     </mat-expansion-panel-header>
     <ng-template matExpansionPanelContent>
       <mat-tab-group>
-        <mat-tab label="Hot Desks">
+        <mat-tab label="Desks">
           <ng-template matTabContent>
             <deskly-resources-table
-              [dataSource]="hotDesks()"
-              [metadataColumns]="desksMetadata"
+              [dataSource]="desks()"
+              [attributeColumns]="desksMetadata"
               (removeResource)="onRemoveResource($event)"
             ></deskly-resources-table>
           </ng-template>
         </mat-tab>
-        <mat-tab label="Private desks">
-          <ng-template matTabContent>
-            <deskly-resources-table
-              [dataSource]="privateDesks()"
-              [metadataColumns]="desksMetadata"
-              (removeResource)="onRemoveResource($event)"
-            ></deskly-resources-table>
-          </ng-template>
-        </mat-tab>
-        <mat-tab label="Conference room">
+        <mat-tab label="Conference rooms">
           <ng-template matTabContent>
             <deskly-resources-table
               [dataSource]="conferenceRooms()"
-              [metadataColumns]="roomsMetadata"
+              [attributeColumns]="roomsMetadata"
               (removeResource)="onRemoveResource($event)"
             ></deskly-resources-table>
           </ng-template>
         </mat-tab>
-        <mat-tab label="Private room">
+        <mat-tab label="Private rooms">
           <deskly-resources-table
             [dataSource]="privateRooms()"
-            [metadataColumns]="roomsMetadata"
+            [attributeColumns]="roomsMetadata"
             (removeResource)="onRemoveResource($event)"
           ></deskly-resources-table>
         </mat-tab>
@@ -43,7 +34,7 @@
           <ng-template matTabContent>
             <deskly-resources-table
               [dataSource]="audioVideoDevices()"
-              [metadataColumns]="audioVideoDevicesMetadata"
+              [attributeColumns]="audioVideoDevicesMetadata"
               (removeResource)="onRemoveResource($event)"
             ></deskly-resources-table>
           </ng-template>

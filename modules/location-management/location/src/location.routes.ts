@@ -13,7 +13,7 @@ import {
   ResourcesFacade
 } from '@deskly/location-management/resources';
 import { ResourceApiClientService } from '@deskly/location-management/resources';
-import { LocationFacade } from './lib/data/location-facade';
+import { LocationFacade } from './lib/data/location-facade.service';
 import {
   RESOURCES_FEATURE_KEY,
   resourcesReducer

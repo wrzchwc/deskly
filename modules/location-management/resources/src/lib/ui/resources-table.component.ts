@@ -2,13 +2,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  input, output, signal
+  input,
+  output,
+  signal
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { Resource, ResourceKey, MetadataKey } from '../domain/resources.model';
+import { ResourceKey } from '../domain/resources.model';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { MatMenuModule } from '@angular/material/menu';
+import { AttributeName, Resource } from '../domain/resource';
 
 @Component({
   selector: 'deskly-resources-table',
@@ -20,7 +23,7 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class ResourcesTableComponent {
   readonly dataSource = input<Resource[]>([]);
-  readonly metadataColumns = input<MetadataKey[]>([]);
+  readonly attributeColumns = input<AttributeName[]>([]);
 
   readonly removeResource = output<string>();
 
@@ -28,7 +31,7 @@ export class ResourcesTableComponent {
 
   readonly displayedColumns = computed(() => [
     ...this.columns,
-    ...this.metadataColumns()
+    ...this.attributeColumns()
   ]);
 
   onRowContextMenuClick(resourceId: string) {

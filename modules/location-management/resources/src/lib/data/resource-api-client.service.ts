@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CreateResourceConfig, ResourceResponse } from './resources.model';
+import { CreateResourceConfig, ResourceResponse } from '../domain/resources.model';
 import { httpError } from '@deskly/shared/rxjs-operators';
 
 @Injectable()

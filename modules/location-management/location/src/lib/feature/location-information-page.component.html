@@ -47,10 +47,9 @@
       <deskly-resources-preview
         class="resources-details"
         [conferenceRooms]="conferenceRooms()"
-        [hotDesks]="hotDesks()"
+        [desks]="hotDesks()"
         [audioVideoDevices]="audioVideoDevices()"
         [privateRooms]="privateRooms()"
-        [privateDesks]="privateDesks()"
         (openPreview)="fetchResources()"
         (removeResource)="removeResource($event)"
       ></deskly-resources-preview>
