@@ -1,10 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { CreateLocationConfig, CreateLocationResponse } from './location.model';
+import {
+  CreateLocationConfig,
+  CreateLocationResponse
+} from '../domain/location.model';
 import { httpError } from '@deskly/shared/rxjs-operators';
-import { Location } from '@deskly/shared/location';
 import { LocationApiTransformerService } from './location-api-transformer.service';
+import { ENVIRONMENT } from '@deskly/environments';
+import { Location } from '../domain/location';
 
 @Injectable()
 export class LocationApiClientService {
@@ -12,12 +16,18 @@ export class LocationApiClientService {
   private readonly locationApiTransformer = inject(
     LocationApiTransformerService
   );
+  private readonly environment = inject(ENVIRONMENT);
 
-  private readonly baseUrl = '/api/location';
+  private readonly baseUrl = `${this.environment.apiUrl}/api/v1/deskly-location/locations`;
+
+  fetchLocations(): Observable<Location[] | undefined> {
+    return this.httpClient.get<Location[]>(this.baseUrl).pipe(httpError());
+  }
 
   createLocation(
     config: CreateLocationConfig
   ): Observable<Location | undefined> {
+    // @ts-expect-error fix this!
     return this.httpClient
       .post<CreateLocationResponse>(
         this.baseUrl,

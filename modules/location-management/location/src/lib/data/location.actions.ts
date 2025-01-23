@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateLocationConfig } from './location.model';
+import { CreateLocationConfig } from '../domain/location.model';
 import { DeleteLocationModalData } from '../ui/delete-location-modal.component';
-import { Location } from '@deskly/shared/location';
+import { Location } from '../domain/location';
 
 const prefix = '[Location Management/Locations]';
 

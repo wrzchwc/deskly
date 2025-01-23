@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { LOCATIONS_FEATURE_KEY, LocationsState } from './location.reducer';
 import { adapter } from './location.reducer';
-import { LocationPreview } from './location.model';
+import { LocationPreview } from '../domain/location.model';
 import {
   selectConferenceRooms,
   selectHotDesks
@@ -25,9 +25,9 @@ export const selectLocationPreviews = createSelector(
   selectLocations,
   (locations) =>
     locations.map<LocationPreview>((location) => ({
-      id: location.id.id,
-      name: location.name.name,
-      city: location.address.city
+      id: location.id,
+      name: location.name,
+      city: location.city
     }))
 );
 

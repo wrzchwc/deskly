@@ -1,29 +1,31 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
+  // computed,
   inject,
   input,
-  OnInit
+  OnInit,
+  Signal
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LocationFacade } from '../domain/location-facade';
+import { LocationFacade } from '../data/location-facade';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { OpeningHoursPreviewComponent } from '../ui/opening-hours-preview.component';
-import { WeekDay } from '@deskly/shared/constants';
+// import { WeekDay } from '@deskly/shared/constants';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import {
   ResourcesFacade,
   ResourcesPreviewComponent
 } from '@deskly/location-management/resources';
-import { WorkDay } from '@deskly/shared/location';
+// import { WorkDay } from '@deskly/shared/location';
+import { Location } from '../domain/location';
 
-interface OpeningHoursData {
-  readonly day: WeekDay;
-  readonly hours: WorkDay | undefined;
-}
+// interface OpeningHoursData {
+//   readonly day: WeekDay;
+//   readonly hours: WorkDay | undefined;
+// }
 
 @Component({
   selector: 'deskly-location-information-page',
@@ -47,19 +49,19 @@ export class LocationInformationPageComponent implements OnInit {
 
   readonly locationId = input('');
 
-  readonly location = this.locationFacade.currentLocation;
+  readonly location: Signal<Location | undefined> =
+    this.locationFacade.currentLocation;
   readonly isLoading = this.locationFacade.isLoadingInProgress;
-  readonly address = computed(() => this.location()?.address);
-  readonly openingHoursData = computed<OpeningHoursData[]>(() => {
-    const location = this.location();
-    if (!location) {
-      return [];
-    }
-    return Object.values(WeekDay).map((day) => ({
-      day,
-      hours: location.openingHours.week[day].at(0)
-    }));
-  });
+  // readonly openingHoursData = computed<OpeningHoursData[]>(() => {
+  //   const location = this.location();
+  //   if (!location) {
+  //     return [];
+  //   }
+  //   return Object.values(WeekDay).map((day) => ({
+  //     day,
+  //     hours: location.openingHours.week[day].at(0)
+  //   }));
+  // });
   readonly hotDesks = this.locationFacade.currentLocationHotDesks;
   readonly conferenceRooms = this.locationFacade.currentLocationConferenceRooms;
   readonly audioVideoDevices =
@@ -82,7 +84,7 @@ export class LocationInformationPageComponent implements OnInit {
   removeLocation() {
     this.locationFacade.startDeletingLocation({
       id: this.locationId(),
-      name: this.location()?.name.name || ''
+      name: this.location()?.name || ''
     });
   }
 

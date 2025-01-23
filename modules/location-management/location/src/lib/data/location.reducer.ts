@@ -9,26 +9,19 @@ import {
   setLocations
 } from './location.actions';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Location } from '@deskly/shared/location';
+import { Location } from '../domain/location';
 
 export const LOCATIONS_FEATURE_KEY = 'location-management/locations';
 
 export interface LocationsState extends EntityState<Location> {
   readonly isLoading: boolean;
-  readonly selectedLocationId: string | undefined;
+  readonly selectedLocationId?: string;
 }
 
-function selectId(location: Location): string {
-  return location.id.id;
-}
-
-export const adapter: EntityAdapter<Location> = createEntityAdapter<Location>({
-  selectId
-});
+export const adapter: EntityAdapter<Location> = createEntityAdapter<Location>();
 
 const initialState = adapter.getInitialState({
-  isLoading: false,
-  selectedLocationId: undefined as string | undefined
+  isLoading: false
 });
 
 export const locationsReducer = createReducer(

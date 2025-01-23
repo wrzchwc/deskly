@@ -3,7 +3,7 @@ import {
   CreateLocationConfig,
   CreateLocationRequest,
   OpeningHours
-} from './location.model';
+} from '../domain/location.model';
 import { WorkDay, Location } from '@deskly/shared/location';
 
 @Injectable()

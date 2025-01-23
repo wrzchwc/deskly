@@ -19,7 +19,7 @@ import {
   selectPrivateDesks,
   selectPrivateRooms
 } from '@deskly/location-management/resources';
-import { Location } from '@deskly/shared/location';
+import { Location } from '../domain/location';
 
 @Injectable()
 export class LocationFacade {

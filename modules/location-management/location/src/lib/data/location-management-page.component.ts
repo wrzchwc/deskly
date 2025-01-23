@@ -4,7 +4,7 @@ import { CreateLocationModalComponent } from '../ui/create-location-modal.compon
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { LocationFacade } from '../domain/location-facade';
+import { LocationFacade } from './location-facade';
 import { LocationsTableComponent } from '../ui/locations-table.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeleteLocationModalData } from '../ui/delete-location-modal.component';
@@ -22,8 +22,8 @@ import { ResourcesFacade } from '@deskly/location-management/resources';
     LocationsTableComponent,
     MatProgressSpinnerModule
   ],
-  templateUrl: './location-management-page.component.html',
-  styleUrl: './location-management-page.component.scss',
+  templateUrl: '../feature/location-management-page.component.html',
+  styleUrl: '../feature/location-management-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocationManagementPageComponent implements OnInit {

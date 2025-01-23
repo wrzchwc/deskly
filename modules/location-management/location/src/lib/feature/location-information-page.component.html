@@ -12,16 +12,16 @@
         <mat-card-content class="content">
           <div class="left">
             <div>
-              <h1 class="header">{{location()?.name?.name}}</h1>
-              <span>id: {{location()?.id?.id}}</span>
+              <h1 class="header">{{location()?.name}}</h1>
+              <span>id: {{location()?.id}}</span>
             </div>
             <div class="bottom">
               <h2 class="header">address</h2>
               <span>
-                {{address()?.street}} {{address()?.streetNumber}} /
-                {{address()?.flatNumber}}
+                {{location()?.street}} {{location()?.buildingName}} /
+                {{location()?.flatNumber}}
               </span>
-              <span>{{address()?.zipCode}} {{address()?.city}}</span>
+              <span>{{location()?.postalCode}} {{location()?.city}}</span>
             </div>
           </div>
           <div class="right">
@@ -49,12 +49,12 @@
         <mat-card-content class="opening-hours-content">
           <h1 class="header">opening hours</h1>
           <div class="opening-hours-container">
-            @for(data of openingHoursData(); track data.day) {
-            <deskly-opening-hours-preview
-              [day]="data.day"
-              [openingHours]="data.hours"
-            ></deskly-opening-hours-preview>
-            }
+            <!--            @for(data of openingHoursData(); track data.day) {-->
+            <!--            <deskly-opening-hours-preview-->
+            <!--              [day]="data.day"-->
+            <!--              [openingHours]="data.hours"-->
+            <!--            ></deskly-opening-hours-preview>-->
+            <!--            }-->
           </div>
         </mat-card-content>
       </mat-card>
