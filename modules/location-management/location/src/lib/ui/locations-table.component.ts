@@ -5,7 +5,7 @@ import {
   output
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LocationPreview } from '../domain/location.model';
+import { LocationPreview } from '../domain/location-preview';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';

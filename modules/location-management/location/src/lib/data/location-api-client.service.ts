@@ -1,12 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CreateLocationResponse } from '../domain/location.model';
 import { httpError } from '@deskly/shared/rxjs-operators';
 import { ENVIRONMENT } from '@deskly/environments';
 import { Location } from '../domain/location';
 import { ResourceDAO } from '@deskly/location-management/resources';
-import { CreateLocationRequest } from '../domain/create-location';
+import {
+  CreateLocationRequest,
+  CreateLocationResponse
+} from '../domain/create-location';
 
 @Injectable()
 export class LocationApiClientService {

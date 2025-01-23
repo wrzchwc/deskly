@@ -8,3 +8,5 @@ export interface CreateLocationRequest {
   readonly buildingName: string;
   readonly flatNumber: string;
 }
+
+export type CreateLocationResponse = NonNullable<unknown>;
