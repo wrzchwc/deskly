@@ -32,7 +32,7 @@ export const LOCATION_ROUTES: Routes = [
       {
         path: '',
         loadComponent: async () =>
-          (await import('./lib/data/location-management-page.component'))
+          (await import('./lib/feature/location-management-page.component'))
             .LocationManagementPageComponent
       }
     ],
