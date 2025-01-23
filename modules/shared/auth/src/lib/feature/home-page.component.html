@@ -1,10 +1,20 @@
 <section class="home-page__main-container">
   <h1 class="header">Welcome to deskly!</h1>
   <div class="buttons-container">
-    <a mat-flat-button color="primary" [href]="signInUrl()" target="_self">
+    <a
+      mat-flat-button
+      color="primary"
+      [href]="urlGenerator.getSignInUrl()"
+      target="_self"
+    >
       Sign in
     </a>
-    <a mat-flat-button color="accent" [href]="signUpUrl()" target="_self">
+    <a
+      mat-flat-button
+      color="accent"
+      [href]="urlGenerator.getSignUpUrl()"
+      target="_self"
+    >
       Sign up
     </a>
   </div>

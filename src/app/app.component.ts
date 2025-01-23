@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '@deskly/shared/navigation';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthFacade } from '@deskly/shared/auth';
+import { isAuthenticated, signOut } from '@deskly/shared/auth';
+import { Store } from '@ngrx/store';
+import { checkAuth } from '@deskly/shared/auth';
 
 @Component({
   standalone: true,
@@ -12,13 +14,16 @@ import { AuthFacade } from '@deskly/shared/auth';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  readonly isAuthenticated = this.authFacade.isAuthenticated;
-  readonly isManager = this.authFacade.isManager;
+export class AppComponent implements OnInit {
+  private readonly store = inject(Store);
 
-  constructor(private readonly authFacade: AuthFacade) {}
+  readonly isAuthenticated = this.store.selectSignal(isAuthenticated);
+
+  ngOnInit(): void {
+    this.store.dispatch(checkAuth());
+  }
 
   signOut() {
-    this.authFacade.signOut();
+    this.store.dispatch(signOut());
   }
 }

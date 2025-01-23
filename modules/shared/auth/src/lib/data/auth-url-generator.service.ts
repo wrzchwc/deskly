@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ENVIRONMENT } from '@deskly/environments';
 
 @Injectable({
@@ -11,11 +11,15 @@ export class AuthUrlGenerator {
   private readonly clientId = this.environment.clientId;
   private readonly redirectUri = this.environment.redirectUri;
 
-  readonly signInUrl = signal(
-    `${this.baseUrl}/login?client_id=${this.clientId}&response_type=token&scope=email+openid&redirect_uri=${this.redirectUri}`
-  ).asReadonly();
+  getSignInUrl() {
+    return `${this.baseUrl}/login?client_id=${this.clientId}&response_type=token&scope=email+openid&redirect_uri=${this.redirectUri}`;
+  }
 
-  readonly signUpUrl = signal(
-    `${this.baseUrl}/signup?client_id=${this.clientId}&response_type=token&scope=email+openid&redirect_uri=${this.redirectUri}`
-  ).asReadonly();
+  getSignUpUrl() {
+    return `${this.baseUrl}/signup?client_id=${this.clientId}&response_type=token&scope=email+openid&redirect_uri=${this.redirectUri}`;
+  }
+
+  getSignOutUrl(): string {
+    return `${this.baseUrl}/logout?client_id=${this.clientId}&logout_uri=${this.redirectUri}`;
+  }
 }

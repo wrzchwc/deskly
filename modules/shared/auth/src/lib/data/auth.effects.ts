@@ -1,85 +1,79 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
+  checkAuth,
   decodeToken,
-  signInFailure,
-  signInSuccess,
+  decodeTokenSuccess,
   signOut,
-  signOutFailure,
   signOutSuccess
 } from './auth.actions';
-import { catchError, filter, map, of, switchMap, tap } from 'rxjs';
-import { AuthApiService } from './auth-api.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { filter, map, switchMap, tap } from 'rxjs';
 import { JwtService } from './jwt.service';
+import { UserGroup } from '../domain/token-payload';
 import { navigateToPage, Route } from '@deskly/shared/navigation';
-import { Authority } from '../domain/auth.model';
+import { AuthUrlGenerator } from './auth-url-generator.service';
 
 @Injectable()
 export class AuthEffects {
-  constructor(
-    private readonly actions$: Actions,
-    private readonly authApiService: AuthApiService,
-    private readonly matSnackBar: MatSnackBar,
-    private readonly jwtService: JwtService
-  ) {}
+  private readonly actions$ = inject(Actions);
+  private readonly jwtService = inject(JwtService);
+  private readonly authUrlGenerator = inject(AuthUrlGenerator);
+
+  private readonly ID_TOKEN = 'id_token';
+  private readonly ACCESS_TOKEN = 'access_token';
+
+  readonly checkAuth$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(checkAuth),
+      map(() => new URLSearchParams(window.location.hash.substring(1))),
+      filter((p) => !!p.get(this.ID_TOKEN) && !!p.get(this.ACCESS_TOKEN)),
+      map((p) => ({
+        identityToken: p.get(this.ID_TOKEN) as string,
+        accessToken: p.get(this.ACCESS_TOKEN) as string
+      })),
+      map((tokens) => decodeToken(tokens))
+    )
+  );
 
   readonly decodeToken$ = createEffect(() =>
     this.actions$.pipe(
       ofType(decodeToken),
-      switchMap(({ token }) =>
-        this.jwtService.decodeToken(token).pipe(
-          map((payload) => {
-            if (!payload) return signInFailure();
-            return signInSuccess({
-              token,
-              authorities: payload.auth.map(({ authority }) => authority)
-            });
-          })
+      switchMap((action) =>
+        this.jwtService.decodeToken(action.identityToken).pipe(
+          filter(Boolean),
+          map((payload) =>
+            decodeTokenSuccess({
+              ...action,
+              groups: (payload['cognito:groups'] || []) as UserGroup[]
+            })
+          )
         )
       )
     )
   );
 
-  readonly navigateOnManagerSignInSuccess$ = createEffect(() =>
+  readonly navigateOnDecodeTokenSuccess$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(signInSuccess),
-      filter(({ authorities }) => authorities.includes(Authority.MANAGER)),
-      map(() => navigateToPage({ route: Route.LOCATION_MANAGEMENT }))
-    )
-  );
-
-  readonly navigateOnTenantSignInSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(signInSuccess),
-      filter(({ authorities }) => authorities.includes(Authority.TENANT)),
-      map(() => navigateToPage({ route: Route.BOOKING }))
+      ofType(decodeTokenSuccess),
+      map(() => navigateToPage({ route: Route.LANDING_PAGE }))
     )
   );
 
   readonly signOut$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signOut),
-      switchMap(() => this.authApiService.signOut()),
-      map(() => signOutSuccess()),
-      catchError(() => of(signOutFailure()))
+      map(() => signOutSuccess())
     )
   );
 
-  readonly navigateOnSignOutSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(signOutSuccess),
-      map(() => navigateToPage({ route: Route.HOME }))
-    )
-  );
-
-  readonly signOutFailure$ = createEffect(
+  readonly signOutSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(signOutFailure),
-        tap(() =>
-          this.matSnackBar.open('Sign out failed! Please try again.', 'OK')
-        )
+        ofType(signOutSuccess),
+        tap(() => {
+          // eslint-disable-next-line functional/immutable-data
+          window.location.href = this.authUrlGenerator.getSignOutUrl();
+        })
       ),
     { dispatch: false }
   );

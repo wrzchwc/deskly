@@ -12,8 +12,5 @@ import { AuthUrlGenerator } from '../data/auth-url-generator.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent {
-  private readonly urlGenerator = inject(AuthUrlGenerator);
-
-  readonly signInUrl = this.urlGenerator.signInUrl;
-  readonly signUpUrl = this.urlGenerator.signUpUrl;
+  readonly urlGenerator = inject(AuthUrlGenerator);
 }

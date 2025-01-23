@@ -1,6 +1,6 @@
 <mat-toolbar class="header__main-container">
   <div class="left-container">
-    @if (isAuthenticated() && isManager()) {
+    @if (isAuthenticated()) {
     <button mat-icon-button color="primary" (click)="onMenuClick()">
       <mat-icon>menu</mat-icon>
     </button>

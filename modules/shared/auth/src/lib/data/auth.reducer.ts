@@ -1,32 +1,29 @@
-import { Authority } from '../domain/auth.model';
 import { createReducer, on } from '@ngrx/store';
-import { signInSuccess, signOutSuccess } from './auth.actions';
+import { decodeTokenSuccess, signOut } from './auth.actions';
+import { UserGroup } from '../domain/token-payload';
 
 export const AUTH_FEATURE_KEY = 'auth';
 
 export interface AuthState {
-  readonly isAuthenticated: boolean;
-  readonly authorities: Authority[];
-  readonly token?: string;
+  readonly identityToken?: string;
+  readonly accessToken?: string;
+  readonly userGroup?: UserGroup;
 }
 
-const initialState: AuthState = {
-  isAuthenticated: false,
-  authorities: []
-};
+const initialState: AuthState = {};
 
 export const authReducer = createReducer(
   initialState,
-  on(signInSuccess, (state, { token, authorities }) => ({
+  on(decodeTokenSuccess, (state, action) => ({
     ...state,
-    token,
-    authorities,
-    isAuthenticated: true
+    identityToken: action.identityToken,
+    accessToken: action.accessToken,
+    userGroup: action.groups.at(0)
   })),
-  on(signOutSuccess, (state) => ({
+  on(signOut, (state) => ({
     ...state,
-    token: undefined,
-    authorities: [],
-    isAuthenticated: false
+    identityToken: undefined,
+    accessToken: undefined,
+    userGroup: undefined
   }))
 );

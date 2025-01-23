@@ -1,26 +1,32 @@
 import { Routes } from '@angular/router';
-import { Route, Title } from '@deskly/shared/navigation';
+import { Route } from '@deskly/shared/navigation';
 import { authGuard } from '@deskly/shared/auth';
 import { guestGuard } from '@deskly/shared/auth';
+import { BOOKING_ROUTES } from '@deskly/booking';
 
 export const APP_ROUTES: Routes = [
   {
     path: Route.HOME,
-    title: Title.HOME,
+    title: 'deskly',
     canActivate: [guestGuard],
     loadComponent: async () => (await import('@deskly/shared/auth')).HomePageComponent
   },
   {
-    path: Route.LOCATION_MANAGEMENT,
-    title: Title.LOCATION_MANAGEMENT,
+    path: Route.LANDING_PAGE,
+    title: 'deskly',
     canActivate: [authGuard],
+    loadComponent: async () => (await import('@deskly/landing-page')).LandingPageComponent
+  },
+  {
+    path: Route.LOCATION_MANAGEMENT,
+    title: 'deskly | Location management',
+    canMatch: [authGuard],
     loadChildren: async () =>
       (await import('@deskly/location-management/location')).LOCATION_ROUTES
   },
   {
     path: Route.BOOKING,
-    title: Title.BOOKING,
-    canActivate: [authGuard],
-    loadChildren: async () => (await import('@deskly/booking')).BOOKING_ROUTES
+    title: 'deskly | Booking',
+    children: BOOKING_ROUTES
   }
 ];

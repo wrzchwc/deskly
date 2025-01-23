@@ -1,22 +1,27 @@
 import { createAction, props } from '@ngrx/store';
-import { Authority } from '../domain/auth.model';
+import { UserGroup } from '../domain/token-payload';
 
 const prefix = '[Auth]';
 
+export const checkAuth = createAction(`${prefix} Check auth`);
+
 export const decodeToken = createAction(
   `${prefix} Decode token`,
-  props<{ readonly token: string }>()
+  props<{
+    readonly identityToken: string;
+    readonly accessToken: string;
+  }>()
 );
 
-export const signInSuccess = createAction(
-  `${prefix} Sign in success`,
-  props<{ readonly token: string; readonly authorities: Authority[] }>()
+export const decodeTokenSuccess = createAction(
+  `${prefix} Decode token success`,
+  props<{
+    readonly identityToken: string;
+    readonly accessToken: string;
+    readonly groups: UserGroup[];
+  }>()
 );
-
-export const signInFailure = createAction(`${prefix} Sign in failure`);
 
 export const signOut = createAction(`${prefix} Sign out`);
 
 export const signOutSuccess = createAction(`${prefix} Sign out success`);
-
-export const signOutFailure = createAction(`${prefix} Sign out failure`);

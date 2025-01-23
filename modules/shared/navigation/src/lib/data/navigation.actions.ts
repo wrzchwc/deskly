@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Route } from './navigation.model';
+import { Route } from '../domain/route';
 
 const prefix = '[Navigation]';
 
