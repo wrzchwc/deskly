@@ -18,10 +18,10 @@ export class LocationApiClientService {
   );
   private readonly environment = inject(ENVIRONMENT);
 
-  private readonly baseUrl = `${this.environment.apiUrl}/api/v1/deskly-location/locations`;
+  private readonly baseUrl = `${this.environment.apiUrl}/api/v1/deskly-location/location`;
 
   fetchLocations(): Observable<Location[] | undefined> {
-    return this.httpClient.get<Location[]>(this.baseUrl).pipe(httpError());
+    return this.httpClient.get<Location[]>(`${this.baseUrl}s`).pipe(httpError());
   }
 
   createLocation(

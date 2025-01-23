@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
-  // computed,
+  Component, computed,
   inject,
   input,
   OnInit,
@@ -12,20 +11,13 @@ import { LocationFacade } from '../data/location-facade';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { OpeningHoursPreviewComponent } from '../ui/opening-hours-preview.component';
-// import { WeekDay } from '@deskly/shared/constants';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import {
   ResourcesFacade,
   ResourcesPreviewComponent
 } from '@deskly/location-management/resources';
-// import { WorkDay } from '@deskly/shared/location';
 import { Location } from '../domain/location';
-
-// interface OpeningHoursData {
-//   readonly day: WeekDay;
-//   readonly hours: WorkDay | undefined;
-// }
 
 @Component({
   selector: 'deskly-location-information-page',
@@ -52,22 +44,19 @@ export class LocationInformationPageComponent implements OnInit {
   readonly location: Signal<Location | undefined> =
     this.locationFacade.currentLocation;
   readonly isLoading = this.locationFacade.isLoadingInProgress;
-  // readonly openingHoursData = computed<OpeningHoursData[]>(() => {
-  //   const location = this.location();
-  //   if (!location) {
-  //     return [];
-  //   }
-  //   return Object.values(WeekDay).map((day) => ({
-  //     day,
-  //     hours: location.openingHours.week[day].at(0)
-  //   }));
-  // });
   readonly hotDesks = this.locationFacade.currentLocationHotDesks;
   readonly conferenceRooms = this.locationFacade.currentLocationConferenceRooms;
   readonly audioVideoDevices =
     this.locationFacade.currentLocationAudioVideoDevices;
   readonly privateDesks = this.locationFacade.currentLocationPrivateDesks;
   readonly privateRooms = this.locationFacade.currentLocationPrivateRooms;
+  readonly address = computed<string>(() => {
+    const short = `${this.location()?.street} ${this.location()?.buildingName}`;
+    if (this.location()?.flatNumber) {
+      return `${short} / ${this.location()?.flatNumber}`;
+    }
+    return short;
+  });
 
   ngOnInit(): void {
     this.locationFacade.fetchLocation(this.locationId());

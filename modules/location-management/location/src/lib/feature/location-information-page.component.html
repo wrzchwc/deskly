@@ -11,16 +11,15 @@
       <mat-card class="general-details">
         <mat-card-content class="content">
           <div class="left">
-            <div>
+            <div class="details-container">
               <h1 class="header">{{location()?.name}}</h1>
-              <span>id: {{location()?.id}}</span>
+              <span>id: {{locationId()}}</span>
+              <span>email: {{location()?.email}}</span>
+              <span>phone number: {{location()?.phoneNumber}}</span>
             </div>
             <div class="bottom">
               <h2 class="header">address</h2>
-              <span>
-                {{location()?.street}} {{location()?.buildingName}} /
-                {{location()?.flatNumber}}
-              </span>
+              <span>{{address()}}</span>
               <span>{{location()?.postalCode}} {{location()?.city}}</span>
             </div>
           </div>
@@ -45,29 +44,17 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-card class="opening-hours-details">
-        <mat-card-content class="opening-hours-content">
-          <h1 class="header">opening hours</h1>
-          <div class="opening-hours-container">
-            <!--            @for(data of openingHoursData(); track data.day) {-->
-            <!--            <deskly-opening-hours-preview-->
-            <!--              [day]="data.day"-->
-            <!--              [openingHours]="data.hours"-->
-            <!--            ></deskly-opening-hours-preview>-->
-            <!--            }-->
-          </div>
-        </mat-card-content>
-      </mat-card>
+      <deskly-resources-preview
+        class="resources-details"
+        [conferenceRooms]="conferenceRooms()"
+        [hotDesks]="hotDesks()"
+        [audioVideoDevices]="audioVideoDevices()"
+        [privateRooms]="privateRooms()"
+        [privateDesks]="privateDesks()"
+        (openPreview)="fetchResources()"
+        (removeResource)="removeResource($event)"
+      ></deskly-resources-preview>
     </div>
-    <deskly-resources-preview
-      [conferenceRooms]="conferenceRooms()"
-      [hotDesks]="hotDesks()"
-      [audioVideoDevices]="audioVideoDevices()"
-      [privateRooms]="privateRooms()"
-      [privateDesks]="privateDesks()"
-      (openPreview)="fetchResources()"
-      (removeResource)="removeResource($event)"
-    ></deskly-resources-preview>
   </div>
   }
 </section>
