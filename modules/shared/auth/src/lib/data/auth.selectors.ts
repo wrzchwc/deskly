@@ -14,3 +14,8 @@ export const identityToken = createSelector(
 );
 
 export const email = createSelector(selectFeature, (state) => state.email);
+
+export const userGroup = createSelector(
+  selectFeature,
+  (state) => state.userGroup
+);

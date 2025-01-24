@@ -1,7 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import {
-  addResourceSuccess,
   fetchResourcesAssignedToCurrentLocationSuccess,
   removeResourceSuccess
 } from './resources.actions';
@@ -24,10 +23,6 @@ export const resourcesReducer = createReducer(
         resources.map((resource) => fromDAO(resource, locationId)),
         state
       )
-  ),
-  on(addResourceSuccess, (state, { resource, locationId }) =>
-    // @ts-expect-error: fix this!
-    adapter.addOne(fromDAO(resource, locationId), state)
   ),
   on(removeResourceSuccess, (state, { resourceId }) =>
     adapter.removeOne(resourceId, state)

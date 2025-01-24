@@ -6,3 +6,5 @@ export { authGuard } from './lib/data/auth.guard';
 export { guestGuard } from './lib/data/guest.guard';
 export * from './lib/data/auth.selectors';
 export * from './lib/data/auth.actions';
+export * from './lib/ui/has-group.directive';
+export * from './lib/domain/token-payload';
