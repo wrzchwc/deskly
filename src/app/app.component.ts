@@ -5,8 +5,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { HasGroupDirective, isAuthenticated, signOut } from '@deskly/auth';
 import { Store } from '@ngrx/store';
-import { checkAuth } from '@deskly/auth';
-import { UserGroup } from '../../modules/shared/auth/src/lib/domain/token-payload';
+import { checkAuth, UserGroup } from '@deskly/auth';
 
 @Component({
   standalone: true,

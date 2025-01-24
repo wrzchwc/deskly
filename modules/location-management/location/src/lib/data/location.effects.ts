@@ -24,7 +24,6 @@ import {
   DeleteLocationModalComponent,
   DeleteLocationModalData
 } from '../ui/delete-location-modal.component';
-import { modalResult } from '@deskly/rxjs-operators';
 import { Store } from '@ngrx/store';
 import { currentLocationId } from './location.selectors';
 import { navigateToPage } from '@deskly/navigation';
@@ -34,6 +33,7 @@ import {
   fetchResourcesAssignedToCurrentLocation,
   fetchResourcesAssignedToCurrentLocationSuccess
 } from '@deskly/location-management/resources';
+import { modalResult } from '@deskly/rxjs-ops';
 
 @Injectable()
 export class LocationEffects {

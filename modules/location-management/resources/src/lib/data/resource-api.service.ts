@@ -1,12 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { httpError } from '@deskly/rxjs-operators';
 import { ENVIRONMENT } from '@deskly/environments';
 import {
   CreateResourceRequest,
   CreateResourceResponse
 } from '../domain/create-resource';
 import { Observable } from 'rxjs';
+import { httpError } from '@deskly/rxjs-ops';
 
 @Injectable()
 export class ResourceApiService {

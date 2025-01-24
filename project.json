@@ -45,6 +45,10 @@
             }
           ],
           "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "optimization": true,
+          "extractLicenses": true,
           "fileReplacements": [
             {
               "replace": "modules/environments/src/lib/domain/environment.ts",
@@ -55,7 +59,8 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"

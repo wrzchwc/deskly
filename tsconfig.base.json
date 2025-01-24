@@ -34,7 +34,7 @@
         "modules/location-management/resources/src/index.ts"
       ],
       "@deskly/navigation": ["modules/navigation/src/index.ts"],
-      "@deskly/rxjs-operators": ["modules/rxjs-operators/src/index.ts"]
+      "@deskly/rxjs-ops": ["modules/rxjs-ops/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"],
