@@ -9,7 +9,7 @@ export class AuthUrlGenerator {
 
   private readonly baseUrl = this.environment.authUrl;
   private readonly clientId = this.environment.clientId;
-  private readonly redirectUri = this.environment.redirectUri;
+  private readonly redirectUri = encodeURIComponent(this.environment.redirectUri);
 
   getSignInUrl() {
     return `${this.baseUrl}/login?client_id=${this.clientId}&response_type=token&scope=email+openid&redirect_uri=${this.redirectUri}`;
