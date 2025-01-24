@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { httpError } from '@deskly/shared/rxjs-operators';
+import { httpError } from '@deskly/rxjs-operators';
 import { ENVIRONMENT } from '@deskly/environments';
 import {
   CreateResourceRequest,

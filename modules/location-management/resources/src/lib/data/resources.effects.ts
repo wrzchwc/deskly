@@ -12,7 +12,7 @@ import {
 import { map, switchMap, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddResourcesModalComponent } from '../ui/add-resources-modal.component';
-import { modalResult } from '@deskly/shared/rxjs-operators';
+import { modalResult } from '@deskly/rxjs-operators';
 import { ResourceApiService } from './resource-api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateResourceRequest } from '../domain/create-resource';

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { Route } from '@deskly/shared/navigation';
-import { authGuard } from '@deskly/shared/auth';
-import { guestGuard } from '@deskly/shared/auth';
+import { Route } from '@deskly/navigation';
+import { authGuard } from '@deskly/auth';
+import { guestGuard } from '@deskly/auth';
 import { BOOKING_ROUTES } from '@deskly/booking';
 
 export const APP_ROUTES: Routes = [
@@ -9,13 +9,14 @@ export const APP_ROUTES: Routes = [
     path: Route.HOME,
     title: 'deskly',
     canActivate: [guestGuard],
-    loadComponent: async () => (await import('@deskly/shared/auth')).HomePageComponent
+    loadComponent: async () => (await import('@deskly/auth')).HomePageComponent
   },
   {
     path: Route.LANDING_PAGE,
     title: 'deskly',
     canActivate: [authGuard],
-    loadComponent: async () => (await import('@deskly/landing-page')).LandingPageComponent
+    loadComponent: async () =>
+      (await import('@deskly/landing-page')).LandingPageComponent
   },
   {
     path: Route.LOCATION_MANAGEMENT,

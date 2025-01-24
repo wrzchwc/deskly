@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { interval, map, startWith } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { email } from '@deskly/shared/auth';
+import { email } from '@deskly/auth';
 
 @Component({
   selector: 'deskly-landing-page',
@@ -17,5 +17,8 @@ export class LandingPageComponent {
 
   readonly email = this.store.selectSignal(email);
 
-  readonly date$ = interval(1000).pipe(startWith(Date.now()), map(() => Date.now()));
+  readonly date$ = interval(1000).pipe(
+    startWith(Date.now()),
+    map(() => Date.now())
+  );
 }

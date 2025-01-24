@@ -24,12 +24,12 @@ import {
   DeleteLocationModalComponent,
   DeleteLocationModalData
 } from '../ui/delete-location-modal.component';
-import { modalResult } from '@deskly/shared/rxjs-operators';
+import { modalResult } from '@deskly/rxjs-operators';
 import { Store } from '@ngrx/store';
 import { currentLocationId } from './location.selectors';
-import { navigateToPage } from '@deskly/shared/navigation';
-import { Route } from '@deskly/shared/navigation';
-import { selectUrl } from '@deskly/shared/navigation';
+import { navigateToPage } from '@deskly/navigation';
+import { Route } from '@deskly/navigation';
+import { selectUrl } from '@deskly/navigation';
 import {
   fetchResourcesAssignedToCurrentLocation,
   fetchResourcesAssignedToCurrentLocationSuccess

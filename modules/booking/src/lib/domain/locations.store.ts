@@ -1,5 +1,5 @@
 import { signalStore, withState } from '@ngrx/signals';
-import { Location } from '@deskly/shared/location';
+import { Location } from '@deskly/location';
 
 interface LocationsState {
   readonly locations: Location[];

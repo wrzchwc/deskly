@@ -5,7 +5,7 @@ import {
   input
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WorkDay } from '@deskly/shared/location';
+import { WorkDay } from '@deskly/location';
 import { WeekDay } from '../domain/week-day';
 
 @Component({

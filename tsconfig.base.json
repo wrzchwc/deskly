@@ -22,21 +22,19 @@
     "useDefineForClassFields": false,
     "baseUrl": ".",
     "paths": {
+      "@deskly/auth": ["modules/auth/src/index.ts"],
       "@deskly/booking": ["modules/booking/src/index.ts"],
       "@deskly/environments": ["modules/environments/src/index.ts"],
       "@deskly/landing-page": ["modules/landing-page/src/index.ts"],
+      "@deskly/location": ["modules/location/src/index.ts"],
       "@deskly/location-management/location": [
         "modules/location-management/location/src/index.ts"
       ],
       "@deskly/location-management/resources": [
         "modules/location-management/resources/src/index.ts"
       ],
-      "@deskly/shared/auth": ["modules/shared/auth/src/index.ts"],
-      "@deskly/shared/location": ["modules/shared/location/src/index.ts"],
-      "@deskly/shared/navigation": ["modules/shared/navigation/src/index.ts"],
-      "@deskly/shared/rxjs-operators": [
-        "modules/shared/rxjs-operators/src/index.ts"
-      ]
+      "@deskly/navigation": ["modules/navigation/src/index.ts"],
+      "@deskly/rxjs-operators": ["modules/rxjs-operators/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"],
