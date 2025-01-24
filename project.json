@@ -44,7 +44,13 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "fileReplacements": [
+            {
+              "replace": "modules/environments/src/lib/domain/environment.ts",
+              "with": "modules/environments/src/lib/domain/environment.prod.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,
@@ -64,8 +70,7 @@
           "buildTarget": "deskly:build:production"
         },
         "development": {
-          "buildTarget": "deskly:build:development",
-          "proxyConfig": "proxy.conf.json"
+          "buildTarget": "deskly:build:development"
         }
       },
       "defaultConfiguration": "development"

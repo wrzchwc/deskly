@@ -18,7 +18,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { CreateLocationModalComponent } from '../ui/create-location-modal.component';
 import { filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
-import { LocationApiClientService } from './location-api-client.service';
+import { LocationApiService } from './location-api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   DeleteLocationModalComponent,
@@ -41,7 +41,7 @@ export class LocationEffects {
     private readonly actions$: Actions,
     private readonly matDialog: MatDialog,
     private readonly matSnackBar: MatSnackBar,
-    private readonly locationApiClientService: LocationApiClientService,
+    private readonly locationApiClientService: LocationApiService,
     private readonly store: Store
   ) {}
 

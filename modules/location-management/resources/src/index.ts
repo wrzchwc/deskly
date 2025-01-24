@@ -1,6 +1,6 @@
 export { ResourcesFacade } from './lib/data/resources-facade.service';
 export { ResourcesEffects } from './lib/data/resources.effects';
-export { ResourceApiClientService } from './lib/data/resource-api-client.service';
+export { ResourceApiService } from './lib/data/resource-api.service';
 export { ResourcesPreviewComponent } from './lib/ui/resources-preview.component';
 export {
   resourcesReducer,

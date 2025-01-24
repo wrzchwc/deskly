@@ -2,23 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
-  Inject,
   OnInit
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef
-} from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import {
-  CreateResourceConfig,
-  CreateResourceRequest,
-  ResourceTypeOld
-} from '../domain/resources.model';
 import { MatInputModule } from '@angular/material/input';
 import {
   FormBuilder,
@@ -32,10 +22,13 @@ import { map, Observable, startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ResourceTypeService } from '../data/resource-type.service';
 import { MatOptionModule } from '@angular/material/core';
+import { CreateResourceRequest } from '../domain/create-resource';
+import { AttributeName, ResourceType } from '../domain/resource';
+import { Attribute } from '../domain/resource';
 
 interface SelectOption {
   readonly label: string;
-  readonly value: ResourceTypeOld;
+  readonly value: ResourceType;
 }
 
 @Component({
@@ -53,16 +46,13 @@ interface SelectOption {
   ],
   templateUrl: './add-resources-modal.component.html',
   styleUrl: './add-resources-modal.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ResourceTypeService]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddResourcesModalComponent implements OnInit {
-  private readonly INITIAL_TYPE = ResourceTypeOld.HOT_DESK;
+  private readonly INITIAL_TYPE = ResourceType.DESK;
 
   private readonly DESK_METADATA = this.formBuilder.group({
-    manufacturer: this.formBuilder.nonNullable.control('', [
-      Validators.required
-    ]),
+    producer: this.formBuilder.nonNullable.control('', [Validators.required]),
     model: this.formBuilder.nonNullable.control('')
   });
 
@@ -74,23 +64,20 @@ export class AddResourcesModalComponent implements OnInit {
   });
 
   private readonly DEVICE_METADATA = this.formBuilder.group({
-    manufacturer: this.formBuilder.nonNullable.control('', [
-      Validators.required
-    ]),
+    producer: this.formBuilder.nonNullable.control('', [Validators.required]),
     model: this.formBuilder.nonNullable.control('', [Validators.required]),
     serialNumber: this.formBuilder.nonNullable.control('', [
       Validators.required
     ])
   });
 
-  readonly options: SelectOption[] = Object.values(ResourceTypeOld).map(
+  readonly options: SelectOption[] = Object.values(ResourceType).map(
     (type) => ({ value: type, label: type.replaceAll('_', ' ') })
   );
 
   readonly formRecord: FormRecord = this.formBuilder.record({
     type: this.formBuilder.nonNullable.control(this.INITIAL_TYPE),
     name: this.formBuilder.nonNullable.control('', [Validators.required]),
-    photos: this.formBuilder.nonNullable.control(''),
     quantity: this.formBuilder.nonNullable.control(1, [
       Validators.required,
       Validators.min(1)
@@ -105,9 +92,8 @@ export class AddResourcesModalComponent implements OnInit {
     private readonly resourceTypeService: ResourceTypeService,
     private readonly matDialogRef: MatDialogRef<
       AddResourcesModalComponent,
-      CreateResourceConfig
-    >,
-    @Inject(MAT_DIALOG_DATA) private readonly locationId: string
+      CreateResourceRequest
+    >
   ) {}
 
   ngOnInit(): void {
@@ -125,7 +111,7 @@ export class AddResourcesModalComponent implements OnInit {
   }
 
   private readonly type$ = (
-    this.formRecord.controls['type'] as FormControl<ResourceTypeOld>
+    this.formRecord.controls['type'] as FormControl<ResourceType>
   ).valueChanges.pipe(startWith(this.INITIAL_TYPE));
 
   readonly isResourceTypeRoom$: Observable<boolean> = this.type$.pipe(
@@ -147,11 +133,36 @@ export class AddResourcesModalComponent implements OnInit {
 
   addResource() {
     this.matDialogRef.close({
-      request: {
-        ...(this.formRecord.value as CreateResourceRequest),
-        photos: (this.formRecord.value['photos'] as string).split(' ')
-      },
-      locationId: this.locationId
+      name: this.formRecord.controls['name'].value,
+      type: this.formRecord.controls['type'].value,
+      attributes: [
+        this.getAttributeFromMetadata('producer'),
+        this.getAttributeFromMetadata('model'),
+        this.getAttributeFromMetadata('capacity'),
+        this.getAttributeFromRecord('quantity'),
+        this.getAttributeFromRecord('description'),
+        {
+          name: 'serial number',
+          value: (this.formRecord.controls['metadata'] as FormGroup).controls[
+            'serialNumber'
+          ]?.value
+        }
+      ]
     });
+  }
+
+  private getAttributeFromMetadata(name: AttributeName): Attribute {
+    return {
+      name,
+      value: (this.formRecord.controls['metadata'] as FormGroup).controls[name]
+        ?.value
+    };
+  }
+
+  private getAttributeFromRecord(name: AttributeName): Attribute {
+    return {
+      name,
+      value: this.formRecord.controls[name].value
+    };
   }
 }

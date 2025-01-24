@@ -21,10 +21,6 @@
     <mat-label>Description</mat-label>
     <textarea matInput formControlName="description"></textarea>
   </mat-form-field>
-  <mat-form-field>
-    <mat-label>Photo URLs (space separated)</mat-label>
-    <textarea matInput formControlName="photos"></textarea>
-  </mat-form-field>
   <div class="metadata-container" [formGroup]="metadataFormGroup">
     @if(isResourceTypeRoom$ | async) {
     <mat-form-field class="numeric-form-field">
@@ -34,7 +30,7 @@
     } @else if (isResourceTypeObject$ | async) {
     <mat-form-field>
       <mat-label>Manufacturer</mat-label>
-      <input type="text" matInput formControlName="manufacturer" />
+      <input type="text" matInput formControlName="producer" />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Model</mat-label>

@@ -13,12 +13,20 @@ export enum ResourceType {
   DEVICE = 'DEVICE'
 }
 
-interface Attribute {
+export interface Attribute {
   readonly name: AttributeName;
   readonly value: string;
 }
 
-export type AttributeName = 'width' | 'depth' | 'serial number' | 'producer';
+export type AttributeName =
+  | 'width'
+  | 'depth'
+  | 'serial number'
+  | 'producer'
+  | 'quantity'
+  | 'description'
+  | 'model'
+  | 'capacity';
 
 export interface Resource {
   readonly id: string;

@@ -12,17 +12,17 @@ import {
 import { map, switchMap, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddResourcesModalComponent } from '../ui/add-resources-modal.component';
-import { CreateResourceConfig } from '../domain/resources.model';
 import { modalResult } from '@deskly/shared/rxjs-operators';
-import { ResourceApiClientService } from './resource-api-client.service';
+import { ResourceApiService } from './resource-api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CreateResourceRequest } from '../domain/create-resource';
 
 @Injectable()
 export class ResourcesEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly matDialog: MatDialog,
-    private readonly resourceApiClientService: ResourceApiClientService,
+    private readonly resourceApiClientService: ResourceApiService,
     private readonly matSnackBar: MatSnackBar
   ) {}
 
@@ -33,7 +33,7 @@ export class ResourcesEffects {
         this.matDialog.open<
           AddResourcesModalComponent,
           string,
-          CreateResourceConfig | undefined
+          CreateResourceRequest | undefined
         >(AddResourcesModalComponent, {
           width: '80vw',
           maxHeight: '80vh',
@@ -41,24 +41,18 @@ export class ResourcesEffects {
         })
       ),
       modalResult(),
-      map((config) => addResource({ config }))
+      map((request) => addResource({ request }))
     )
   );
 
   readonly addResource = createEffect(() =>
     this.actions$.pipe(
       ofType(addResource),
-      switchMap(({ config }) =>
-        this.resourceApiClientService.addResource(config).pipe(
-          map((response) =>
-            response
-              ? addResourceSuccess({
-                  resource: response,
-                  locationId: config.locationId
-                })
-              : addResourceFailure()
-          )
-        )
+      switchMap(({ request }) =>
+        this.resourceApiClientService.addResource(request)
+      ),
+      map((response) =>
+        response ? addResourceSuccess() : addResourceFailure()
       )
     )
   );

@@ -11,7 +11,7 @@ import {
 } from '../domain/create-location';
 
 @Injectable()
-export class LocationApiClientService {
+export class LocationApiService {
   private readonly httpClient = inject(HttpClient);
   private readonly environment = inject(ENVIRONMENT);
 

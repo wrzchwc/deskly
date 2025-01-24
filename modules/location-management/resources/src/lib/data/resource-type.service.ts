@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
-import { ResourceTypeOld } from '../domain/resources.model';
+import { ResourceType } from '../domain/resource';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ResourceTypeService {
-  isRoom(type: ResourceTypeOld): boolean {
-    const { CONFERENCE_ROOM, PRIVATE_ROOM } = ResourceTypeOld;
+  isRoom(type: ResourceType): boolean {
+    const { CONFERENCE_ROOM, PRIVATE_ROOM } = ResourceType;
     return type === CONFERENCE_ROOM || type === PRIVATE_ROOM;
   }
 
-  isAudioVideoDevice(type: ResourceTypeOld): boolean {
-    return type === ResourceTypeOld.AUDIO_VIDEO_DEVICE;
+  isAudioVideoDevice(type: ResourceType): boolean {
+    return type === ResourceType.DEVICE;
   }
 
-  isObject(type: ResourceTypeOld): boolean {
-    return (
-      this.isAudioVideoDevice(type) ||
-      type === ResourceTypeOld.HOT_DESK ||
-      type === ResourceTypeOld.PRIVATE_DESK
-    );
+  isObject(type: ResourceType): boolean {
+    return this.isAudioVideoDevice(type) || type === ResourceType.DESK;
   }
 }

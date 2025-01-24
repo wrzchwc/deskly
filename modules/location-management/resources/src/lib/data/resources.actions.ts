@@ -1,9 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import {
-  CreateResourceConfig,
-  ResourceResponse
-} from '../domain/resources.model';
 import { ResourceDAO } from '../domain/resource';
+import { CreateResourceRequest } from '../domain/create-resource';
 
 const prefix = '[Location Management/Resources]';
 
@@ -14,12 +11,11 @@ export const startAddingResources = createAction(
 
 export const addResource = createAction(
   `${prefix} Add resource`,
-  props<{ readonly config: CreateResourceConfig }>()
+  props<{ readonly request: CreateResourceRequest }>()
 );
 
 export const addResourceSuccess = createAction(
-  `${prefix} Add resource success`,
-  props<{ readonly resource: ResourceResponse; readonly locationId: string }>()
+  `${prefix} Add resource success`
 );
 
 export const addResourceFailure = createAction(
